@@ -1,7 +1,13 @@
 import React, { useState, useEffect } from "react";
 //import Navbar from "./navbar";
 import { db } from "./firebase";
-import { collection, getDocs, addDoc } from "firebase/firestore";
+import {
+  collection,
+  getDocs,
+  addDoc,
+  deleteDoc,
+  doc,
+} from "firebase/firestore";
 import "./App.css";
 
 function App() {
@@ -34,6 +40,12 @@ function App() {
     };
     getUsers(); //call function to fetch users from Firebase document
   }, []);
+
+  //---CRU(D)---
+  const deleteUser = async (id) => {
+    const userDoc = doc(db, "users", id);
+    await deleteDoc(userDoc);
+  };
 
   return (
     <div className="App">
@@ -69,6 +81,14 @@ function App() {
             <h1>Name: {user.name}</h1>
             <h1>Age: {user.age}</h1>
             <h1>Email: {user.email}</h1>
+            {/* ---CRU(D)--- */}
+            <button
+              onClick={() => {
+                deleteUser(user.id);
+              }}
+            >
+              Delete User
+            </button>
           </div>
         );
       })}
