@@ -47,50 +47,57 @@ function LandingPage() {
   };
 
   return (
-    <div className="App">
-      {/* ---(C)RUD--- */}
-      <input
-        placeholder="Name"
-        onChange={(event) => {
-          setNewName(event.target.value);
-        }}
-      />
-      <input
-        type="number"
-        placeholder="Age"
-        onChange={(event) => {
-          setNewAge(event.target.value);
-        }}
-      />
+    <div className="formContainer">
+      <form>
+        {/* ---(C)RUD--- */}
+        <div>
+          <input
+            placeholder="Name"
+            onChange={(event) => {
+              setNewName(event.target.value);
+            }}
+          />
+        </div>
+        <div>
+          <input
+            type="number"
+            placeholder="Age"
+            onChange={(event) => {
+              setNewAge(event.target.value);
+            }}
+          />
+        </div>
+        <div>
+          <input
+            type="email"
+            placeholder="Email"
+            onChange={(event) => {
+              setNewEmail(event.target.value);
+            }}
+          />
+        </div>
+        <button onClick={createUser}>Continue</button>
+        {/*needs to be an interval dropdown*/}
 
-      <input
-        type="email"
-        placeholder="Email"
-        onChange={(event) => {
-          setNewEmail(event.target.value);
-        }}
-      />
-      <button onClick={createUser}>Create User</button>
-      {/*needs to be an interval dropdown*/}
-
-      {/* ---C(R)UD--- */}
-      {users.map((user) => {
-        return (
-          <div>
-            <h1>Name: {user.name}</h1>
-            <h1>Age: {user.age}</h1>
-            <h1>Email: {user.email}</h1>
-            {/* ---CRU(D)--- */}
-            <button
-              onClick={() => {
-                deleteUser(user.id);
-              }}
-            >
-              Delete User
-            </button>
-          </div>
-        );
-      })}
+        {/* ---C(R)UD--- */}
+        {users.map((user) => {
+          return (
+            <div>
+              <h1>Name: {user.name}</h1>
+              <h1>Age: {user.age}</h1>
+              <h1>Email: {user.email}</h1>
+              {/* ---CRU(D)--- */}
+              <button
+                onClick={() => {
+                  deleteUser(user.id);
+                }}
+              >
+                Delete User
+              </button>
+            </div>
+          );
+        })}
+      </form>
     </div>
   );
 }
