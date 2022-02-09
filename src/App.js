@@ -36,10 +36,10 @@ function App() {
       //cannot make useEffect async, use async inside hook
       const data = await getDocs(userCollection); //get collection using reference
       setUsers(data.docs.map((doc) => ({ ...doc.data(), id: doc.id }))); //append fetched information to users array
-      //console.log(data.docs);
+      console.log("updated");
     };
     getUsers(); //call function to fetch users from Firebase document
-  }, [userCollection]);
+  }, []); //***fix rerendering
 
   //---CRU(D)---
   const deleteUser = async (id) => {
