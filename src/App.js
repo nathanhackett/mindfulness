@@ -39,7 +39,7 @@ function App() {
       //console.log(data.docs);
     };
     getUsers(); //call function to fetch users from Firebase document
-  }, []);
+  }, [userCollection]);
 
   //---CRU(D)---
   const deleteUser = async (id) => {
