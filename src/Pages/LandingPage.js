@@ -7,15 +7,18 @@ import {
   deleteDoc,
   doc,
 } from "firebase/firestore";
+import TextField from "@material-ui/core/TextField";
+import Button from "@material-ui/core/Button";
 import "../App.css";
+import { Typography } from "@material-ui/core";
 
 function LandingPage() {
-  const [users, setUsers] = useState([]); //state to hold user information, initialise as empty array
-  const userCollection = collection(db, "users"); //variable to reference user information from Firestore collection (not state)
+  const [users, setUsers] = useState([]); //state to hold users, initialise as empty array
+  const userCollection = collection(db, "users"); //variable to reference user information from Firestore collection
 
-  const [newName, setNewName] = useState("");
-  const [newAge, setNewAge] = useState(0);
-  const [newEmail, setNewEmail] = useState("");
+  const [newName, setNewName] = useState(""); //state to hold user name, initialise as empty string
+  const [newAge, setNewAge] = useState(0); //state to hold user age, initialise as 0
+  const [newEmail, setNewEmail] = useState(""); //state to hold user email, initialise as empty string
 
   //---(C)RUD---
   const createUser = async () => {
@@ -47,19 +50,30 @@ function LandingPage() {
   };
 
   return (
-    <div className="formContainer">
-      <form>
+    <div className="App">
+      <Typography>
+        <h2>Mindfulness Meaure</h2>
+      </Typography>
+      <Typography>
+        <h3>A Maynooth University Research Initiative</h3>
+      </Typography>
+      <br />
+      <form className="formContainer">
         {/* ---(C)RUD--- */}
-        <div>
-          <input
+        <div className="innerForm">
+          <TextField
+            fullWidth
+            variant="outlined"
             placeholder="Name"
             onChange={(event) => {
               setNewName(event.target.value);
             }}
           />
         </div>
-        <div>
-          <input
+        <div className="innerForm">
+          <TextField
+            fullWidth
+            variant="outlined"
             type="number"
             placeholder="Age"
             onChange={(event) => {
@@ -67,8 +81,10 @@ function LandingPage() {
             }}
           />
         </div>
-        <div>
-          <input
+        <div className="innerForm">
+          <TextField
+            fullWidth
+            variant="outlined"
             type="email"
             placeholder="Email"
             onChange={(event) => {
@@ -76,10 +92,16 @@ function LandingPage() {
             }}
           />
         </div>
-        <button onClick={createUser}>Continue</button>
+        <Typography>
+          <h3 className="">Why do we need this information?</h3>
+        </Typography>
+        <Button className="buttonStyle" onClick={createUser}>
+          Continue
+        </Button>
         {/*needs to be an interval dropdown*/}
-
-        {/* ---C(R)UD--- */}
+      </form>
+      {/* ---C(R)UD--- */}
+      <div className="App">
         {users.map((user) => {
           return (
             <div>
@@ -87,17 +109,17 @@ function LandingPage() {
               <h1>Age: {user.age}</h1>
               <h1>Email: {user.email}</h1>
               {/* ---CRU(D)--- */}
-              <button
+              <Button
                 onClick={() => {
                   deleteUser(user.id);
                 }}
               >
                 Delete User
-              </button>
+              </Button>
             </div>
           );
         })}
-      </form>
+      </div>
     </div>
   );
 }

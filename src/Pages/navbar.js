@@ -1,6 +1,6 @@
 import React from "react";
 
-export default function Navbar() {
+function Navbar() {
   return (
     // https://www.w3schools.com/bootstrap4/bootstrap_colors.asp
     <nav className="navbar navbar-light bg-light">
@@ -9,3 +9,4 @@ export default function Navbar() {
     </nav>
   );
 }
+export default Navbar;

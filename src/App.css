@@ -1,8 +1,35 @@
 .App {
+  align-items: center;
   text-align: center;
-  padding: 10%;
+  padding-top: 10%;
 }
 
 .formContainer {
+  background-color: rgb(255, 255, 255);
+  align-items: center;
   text-align: center;
+  display: block;
+  padding-left: 30%;
+  padding-right: 30%;
+}
+
+.innerForm {
+  background-color: rgb(240, 240, 240);
+  margin-top: 5%;
+  width: 100%;
+}
+
+h3 {
+  font-family: sans-serif;
+  font-weight: 100;
+}
+
+.buttonStyle {
+  background-color: aqua;
+  margin: "2%";
+  width: "70%";
+}
+
+.navbarUser {
+  flex-grow: 1;
 }
