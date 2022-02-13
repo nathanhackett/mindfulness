@@ -9,14 +9,13 @@
   align-items: center;
   text-align: center;
   display: block;
-  padding-left: 30%;
-  padding-right: 30%;
+  margin-right: 40%;
+  margin-left: 40%;
 }
 
 .innerForm {
   background-color: rgb(240, 240, 240);
   margin-top: 5%;
-  width: 100%;
 }
 
 h3 {
@@ -25,7 +24,7 @@ h3 {
 }
 
 .buttonStyle {
-  background-color: aqua;
+  background-color: rgb(240, 240, 240);
   margin: "2%";
   width: "70%";
 }

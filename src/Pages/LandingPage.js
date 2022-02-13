@@ -11,6 +11,7 @@ import TextField from "@material-ui/core/TextField";
 import Button from "@material-ui/core/Button";
 import "../App.css";
 import { Typography } from "@material-ui/core";
+import { Link } from "react-router-dom";
 
 function LandingPage() {
   const [users, setUsers] = useState([]); //state to hold users, initialise as empty array
@@ -63,6 +64,7 @@ function LandingPage() {
         <div className="innerForm">
           <TextField
             fullWidth
+            required
             variant="outlined"
             placeholder="Name"
             onChange={(event) => {
@@ -95,9 +97,14 @@ function LandingPage() {
         <Typography>
           <h3 className="">Why do we need this information?</h3>
         </Typography>
-        <Button className="buttonStyle" onClick={createUser}>
-          Continue
-        </Button>
+
+        {/* <Link to="introduction" className="buttonStyle" onClick={createUser}>
+          <Typography>Continue</Typography>
+        </Link> */}
+        <Link to="introduction" className="buttonStyle">
+          <Typography>Continue</Typography>
+        </Link>
+
         {/*needs to be an interval dropdown*/}
       </form>
       {/* ---C(R)UD--- */}
