@@ -98,10 +98,7 @@ function LandingPage() {
           <h3 className="">Why do we need this information?</h3>
         </Typography>
 
-        {/* <Link to="introduction" className="buttonStyle" onClick={createUser}>
-          <Typography>Continue</Typography>
-        </Link> */}
-        <Link to="introduction" className="buttonStyle">
+        <Link to="introduction" className="buttonStyle" onClick={createUser}>
           <Typography>Continue</Typography>
         </Link>
 
