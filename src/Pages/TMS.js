@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 
 export default function TMS() {
   return (
-    <div>
+    <div className="App">
       <Link to={{ pathname: "/taskEnd" }}>
         <h1>{window.location.pathname}</h1>
       </Link>{" "}

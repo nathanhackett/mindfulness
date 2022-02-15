@@ -100,23 +100,29 @@ function LandingPage() {
 
   return (
     <div className="App">
-      <h2>Mindfulness Meaure</h2>
-      <h3>A Maynooth University Research Initiative</h3>
+      <h1>Mindfulness Meaure</h1>
+      <br />
+      <h4>A Maynooth University Research Initiative</h4>
       <br />
       <form className="formContainer">
         {/* ---(C)RUD--- */}
         <div className="formFields">
-          <label className="formLabel">
-            Name
-            <input
+          {/* <input
               className="formInput"
               type="text"
               placeholder="Enter your full name"
               onChange={(event) => {
                 setNewName(event.target.value);
               }}
-            />
-          </label>
+            /> */}
+          <TextField
+            className="formInput"
+            id="standard-basic"
+            label="Name"
+            variant="standard"
+            type="text"
+            helperText="Please enter your full name"
+          />
         </div>
 
         {/* <div className="formFields">
@@ -134,6 +140,7 @@ function LandingPage() {
         </div> */}
         <div className="formFields">
           <TextField
+            className="formInput"
             select
             label="Age"
             value={newAge}
@@ -152,9 +159,7 @@ function LandingPage() {
         </div>
 
         <div className="formFields">
-          <label className="formLabel">
-            Email
-            <input
+          {/* <input
               className="formInput"
               type="email"
               placeholder="Enter your email"
@@ -164,19 +169,30 @@ function LandingPage() {
                   setNewEmail(event.target.value);
                 })
               }
-            />
-          </label>
+            /> */}
+          <TextField
+            className="formInput"
+            id="standard-basic"
+            label="Email"
+            variant="standard"
+            type="email"
+            helperText="Please enter your email"
+          />
           <div className={`message ${isValid ? "success" : "error"}`}>
             {message}
           </div>
+          <br />
+          <p style={{ color: "grey" }}>Why do we need this information?</p>
         </div>
       </form>
-      <h3 className="">Why do we need this information?</h3>
 
       {/* <Link to="introduction" onClick={createUser}>
-          Continue
-        </Link> */}
-      <Link to="introduction">Continue</Link>
+        Continue
+      </Link> */}
+      <br />
+      <Link to="introduction" className="btn">
+        Continue
+      </Link>
 
       {/* ---C(R)UD--- */}
       <div className="App">

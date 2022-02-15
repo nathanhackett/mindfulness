@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 
 export default function Task6Sorting() {
   return (
-    <div>
+    <div className="App">
       <Link to={{ pathname: "/tutorialEnd" }}>
         <h1>{window.location.pathname}</h1>
       </Link>

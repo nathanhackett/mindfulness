@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 
 export default function SampleSorting() {
   return (
-    <div>
+    <div className="App">
       <Link to="/">
         <h1>{window.location.pathname}</h1>
       </Link>{" "}

@@ -2,7 +2,7 @@ import React from "react";
 import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
 import { createTheme, ThemeProvider } from "@material-ui/core";
 
-import Navbar from "./Pages/navbar";
+import Navbar from "./Pages/Navbar";
 import LandingPage from "./Pages/LandingPage";
 import Introduction from "./Pages/Introduction";
 import SampleTask from "./Pages/SampleTask";
@@ -21,7 +21,7 @@ import End from "./Pages/End";
 const theme = createTheme({
   palette: {
     primary: {
-      main: "#0052cc",
+      main: "#78b8c2",
     },
     secondary: {
       main: "#edf2ff",

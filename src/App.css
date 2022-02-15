@@ -1,27 +1,29 @@
 .App {
   align-items: center;
   text-align: center;
-  padding-top: 5%;
-  background-color: rgb(238, 238, 238);
+  padding: 5%;
+  background-color: rgb(255, 255, 255);
 }
 
 .navbar {
   flex-grow: 1;
   background-color: #78b8c2;
-  padding: 30px;
+  padding: 20px;
   color: rgb(255, 255, 255);
 }
 
 .formContainer {
-  background-color: aqua;
+  background-color: rgb(255, 255, 255);
+  padding: 10px;
 }
 
 .formFields {
-  background-color: aquamarine;
+  background-color: rgb(255, 255, 255);
 }
 
 .formInput {
   text-align: left;
+  width: 300px;
 }
 
 .success {
@@ -30,4 +32,18 @@
 
 .error {
   color: red;
+}
+
+.btn {
+  background-color: #e7e7e7;
+  color: rgb(0, 144, 155);
+  width: 200px;
+  box-shadow: inset 0 -3em 3em rgba(255, 255, 255, 0.1), 0 0 0 1px #cecece,
+    0.3em 0.3em 1em rgba(0, 0, 0, 0.3);
+}
+
+.text {
+  max-width: inherit;
+  padding-left: 20%;
+  padding-right: 20%;
 }
