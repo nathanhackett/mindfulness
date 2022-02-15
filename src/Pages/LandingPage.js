@@ -118,7 +118,8 @@ function LandingPage() {
             />
           </label>
         </div>
-        <div className="formFields">
+
+        {/* <div className="formFields">
           <label className="formLabel">
             Age
             <input
@@ -130,24 +131,25 @@ function LandingPage() {
               // }}
             />
           </label>
+        </div> */}
+        <div className="formFields">
+          <TextField
+            select
+            label="Age"
+            value={newAge}
+            onChange={(event) => {
+              setNewAge(event.target.value);
+            }}
+            helperText="Please select your age bracket"
+            variant="standard"
+          >
+            {ages.map((option) => (
+              <MenuItem key={option.value} value={option.value}>
+                {option.label}
+              </MenuItem>
+            ))}
+          </TextField>
         </div>
-
-        <TextField
-          select
-          label="Age"
-          value={newAge}
-          onChange={(event) => {
-            setNewAge(event.target.value);
-          }}
-          helperText="Please select your age bracket"
-          variant="standard"
-        >
-          {ages.map((option) => (
-            <MenuItem key={option.value} value={option.value}>
-              {option.label}
-            </MenuItem>
-          ))}
-        </TextField>
 
         <div className="formFields">
           <label className="formLabel">
@@ -168,13 +170,13 @@ function LandingPage() {
             {message}
           </div>
         </div>
-        <h3 className="">Why do we need this information?</h3>
+      </form>
+      <h3 className="">Why do we need this information?</h3>
 
-        {/* <Link to="introduction" onClick={createUser}>
+      {/* <Link to="introduction" onClick={createUser}>
           Continue
         </Link> */}
-        <Link to="introduction">Continue</Link>
-      </form>
+      <Link to="introduction">Continue</Link>
 
       {/* ---C(R)UD--- */}
       <div className="App">

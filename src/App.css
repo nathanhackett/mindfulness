@@ -2,6 +2,26 @@
   align-items: center;
   text-align: center;
   padding-top: 5%;
+  background-color: rgb(238, 238, 238);
+}
+
+.navbar {
+  flex-grow: 1;
+  background-color: #78b8c2;
+  padding: 30px;
+  color: rgb(255, 255, 255);
+}
+
+.formContainer {
+  background-color: aqua;
+}
+
+.formFields {
+  background-color: aquamarine;
+}
+
+.formInput {
+  text-align: left;
 }
 
 .success {
