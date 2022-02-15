@@ -1,3 +1,4 @@
+//backend imports
 import React, { useState, useEffect } from "react";
 import { db } from "../firebase";
 import {
@@ -7,16 +8,66 @@ import {
   deleteDoc,
   doc,
 } from "firebase/firestore";
-import "../App.css";
 import { Link } from "react-router-dom";
+//frontend imports
+import "../App.css";
+import { TextField } from "@material-ui/core";
+import { MenuItem } from "@material-ui/core";
 
 function LandingPage() {
   const [users, setUsers] = useState([]); //state to hold users, initialise as empty array
   const userCollection = collection(db, "users"); //variable to reference user information from Firestore collection
 
   const [newName, setNewName] = useState(""); //state to hold user name, initialise as empty string
-  const [newAge, setNewAge] = useState(0); //state to hold user age, initialise as 0
+  const [newAge, setNewAge] = useState(""); //state to hold user age, initialise as 0
   const [newEmail, setNewEmail] = useState(""); //state to hold user email, initialise as empty string
+
+  const [isValid, setIsValid] = useState(false);
+  const [message, setMessage] = useState("");
+
+  const emailRegex = /\S+@\S+\.\S+/;
+
+  const validateEmail = (event) => {
+    const newEmail = event.target.value;
+    if (emailRegex.test(newEmail)) {
+      setIsValid(true);
+      setMessage("Your email looks good!");
+    } else {
+      setIsValid(false);
+      setMessage("Please enter a valid email!");
+    }
+  };
+
+  const ages = [
+    {
+      value: "<12",
+      label: "<12",
+    },
+    {
+      value: "13-19",
+      label: "13-19",
+    },
+    {
+      value: "20-29",
+      label: "20-29",
+    },
+    {
+      value: "30-39",
+      label: "30-39",
+    },
+    {
+      value: "40-49",
+      label: "40-49",
+    },
+    {
+      value: "50-59",
+      label: "50-59",
+    },
+    {
+      value: "60+",
+      label: "60+",
+    },
+  ];
 
   //---(C)RUD---
   const createUser = async () => {
@@ -54,43 +105,77 @@ function LandingPage() {
       <br />
       <form className="formContainer">
         {/* ---(C)RUD--- */}
-        <div className="innerForm">
-          <input
-            placeholder="Name"
-            onChange={(event) => {
-              setNewName(event.target.value);
-            }}
-          />
+        <div className="formFields">
+          <label className="formLabel">
+            Name
+            <input
+              className="formInput"
+              type="text"
+              placeholder="Enter your full name"
+              onChange={(event) => {
+                setNewName(event.target.value);
+              }}
+            />
+          </label>
         </div>
-        <div className="innerForm">
-          <input
-            type="number"
-            placeholder="Age"
-            onChange={(event) => {
-              setNewAge(event.target.value);
-            }}
-          />
+        <div className="formFields">
+          <label className="formLabel">
+            Age
+            <input
+              className="formInput"
+              type="number"
+              placeholder="Enter your age bracket"
+              // onChange={(event) => {
+              //   setNewAge(event.target.value);
+              // }}
+            />
+          </label>
         </div>
-        <div className="innerForm">
-          <input
-            type="email"
-            placeholder="Email"
-            onChange={(event) => {
-              setNewEmail(event.target.value);
-            }}
-          />
+
+        <TextField
+          select
+          label="Age"
+          value={newAge}
+          onChange={(event) => {
+            setNewAge(event.target.value);
+          }}
+          helperText="Please select your age bracket"
+          variant="standard"
+        >
+          {ages.map((option) => (
+            <MenuItem key={option.value} value={option.value}>
+              {option.label}
+            </MenuItem>
+          ))}
+        </TextField>
+
+        <div className="formFields">
+          <label className="formLabel">
+            Email
+            <input
+              className="formInput"
+              type="email"
+              placeholder="Enter your email"
+              onChange={
+                (validateEmail,
+                (event) => {
+                  setNewEmail(event.target.value);
+                })
+              }
+            />
+          </label>
+          <div className={`message ${isValid ? "success" : "error"}`}>
+            {message}
+          </div>
         </div>
         <h3 className="">Why do we need this information?</h3>
 
-        {/* <Link to="introduction" className="buttonStyle" onClick={createUser}>
+        {/* <Link to="introduction" onClick={createUser}>
           Continue
         </Link> */}
-        <Link to="introduction" className="buttonStyle">
-          Continue
-        </Link>
-
-        {/*needs to be an interval dropdown*/}
+        <Link to="introduction">Continue</Link>
       </form>
+
       {/* ---C(R)UD--- */}
       <div className="App">
         {users.map((user) => {

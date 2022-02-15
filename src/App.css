@@ -3,3 +3,11 @@
   text-align: center;
   padding-top: 5%;
 }
+
+.success {
+  color: blue;
+}
+
+.error {
+  color: red;
+}
