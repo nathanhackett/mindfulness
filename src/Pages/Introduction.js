@@ -7,9 +7,7 @@ export default function Introduction() {
   return (
     <div>
       <Link to="/" element={<LandingPage />}>
-        <Typography>
-          <h1>{window.location.pathname}</h1>
-        </Typography>
+        <h1>{window.location.pathname}</h1>
       </Link>
     </div>
   );

@@ -7,10 +7,7 @@ import {
   deleteDoc,
   doc,
 } from "firebase/firestore";
-import TextField from "@material-ui/core/TextField";
-import Button from "@material-ui/core/Button";
 import "../App.css";
-import { Typography } from "@material-ui/core";
 import { Link } from "react-router-dom";
 
 function LandingPage() {
@@ -52,20 +49,13 @@ function LandingPage() {
 
   return (
     <div className="App">
-      <Typography>
-        <h2>Mindfulness Meaure</h2>
-      </Typography>
-      <Typography>
-        <h3>A Maynooth University Research Initiative</h3>
-      </Typography>
+      <h2>Mindfulness Meaure</h2>
+      <h3>A Maynooth University Research Initiative</h3>
       <br />
       <form className="formContainer">
         {/* ---(C)RUD--- */}
         <div className="innerForm">
-          <TextField
-            fullWidth
-            required
-            variant="outlined"
+          <input
             placeholder="Name"
             onChange={(event) => {
               setNewName(event.target.value);
@@ -73,9 +63,7 @@ function LandingPage() {
           />
         </div>
         <div className="innerForm">
-          <TextField
-            fullWidth
-            variant="outlined"
+          <input
             type="number"
             placeholder="Age"
             onChange={(event) => {
@@ -84,9 +72,7 @@ function LandingPage() {
           />
         </div>
         <div className="innerForm">
-          <TextField
-            fullWidth
-            variant="outlined"
+          <input
             type="email"
             placeholder="Email"
             onChange={(event) => {
@@ -94,12 +80,13 @@ function LandingPage() {
             }}
           />
         </div>
-        <Typography>
-          <h3 className="">Why do we need this information?</h3>
-        </Typography>
+        <h3 className="">Why do we need this information?</h3>
 
-        <Link to="introduction" className="buttonStyle" onClick={createUser}>
-          <Typography>Continue</Typography>
+        {/* <Link to="introduction" className="buttonStyle" onClick={createUser}>
+          Continue
+        </Link> */}
+        <Link to="introduction" className="buttonStyle">
+          Continue
         </Link>
 
         {/*needs to be an interval dropdown*/}
@@ -113,13 +100,13 @@ function LandingPage() {
               <h1>Age: {user.age}</h1>
               <h1>Email: {user.email}</h1>
               {/* ---CRU(D)--- */}
-              <Button
+              <button
                 onClick={() => {
                   deleteUser(user.id);
                 }}
               >
                 Delete User
-              </Button>
+              </button>
             </div>
           );
         })}
