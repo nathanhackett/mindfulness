@@ -107,14 +107,6 @@ function LandingPage() {
       <form className="formContainer">
         {/* ---(C)RUD--- */}
         <div className="formFields">
-          {/* <input
-              className="formInput"
-              type="text"
-              placeholder="Enter your full name"
-              onChange={(event) => {
-                setNewName(event.target.value);
-              }}
-            /> */}
           <TextField
             className="formInput"
             id="standard-basic"
@@ -122,33 +114,21 @@ function LandingPage() {
             variant="standard"
             type="text"
             helperText="Please enter your full name"
+            onChange={(event) => {
+              setNewName(event.target.value);
+            }}
           />
         </div>
-
-        {/* <div className="formFields">
-          <label className="formLabel">
-            Age
-            <input
-              className="formInput"
-              type="number"
-              placeholder="Enter your age bracket"
-              // onChange={(event) => {
-              //   setNewAge(event.target.value);
-              // }}
-            />
-          </label>
-        </div> */}
         <div className="formFields">
           <TextField
             className="formInput"
             select
             label="Age"
-            value={newAge}
+            helperText="Please select your age bracket"
+            variant="standard"
             onChange={(event) => {
               setNewAge(event.target.value);
             }}
-            helperText="Please select your age bracket"
-            variant="standard"
           >
             {ages.map((option) => (
               <MenuItem key={option.value} value={option.value}>
@@ -159,17 +139,6 @@ function LandingPage() {
         </div>
 
         <div className="formFields">
-          {/* <input
-              className="formInput"
-              type="email"
-              placeholder="Enter your email"
-              onChange={
-                (validateEmail,
-                (event) => {
-                  setNewEmail(event.target.value);
-                })
-              }
-            /> */}
           <TextField
             className="formInput"
             id="standard-basic"
@@ -177,19 +146,34 @@ function LandingPage() {
             variant="standard"
             type="email"
             helperText="Please enter your email"
+            onChange={(event) => {
+              setNewEmail(event.target.value);
+            }}
           />
           <div className={`message ${isValid ? "success" : "error"}`}>
             {message}
           </div>
           <br />
-          <p style={{ color: "grey" }}>Why do we need this information?</p>
+        </div>
+        <div className="helpBubble">
+          <p class="speechHover" style={{ color: "grey" }}>
+            Why do we need this information?
+          </p>
+          <div class="speechBubble">
+            This research is being conducted in accordance with University
+            security and privacy policies. <br />
+            This information is necessary in identifying demographic patterns in
+            the sample response collection. <br />
+            It also provides a means of identifying participants and reaching
+            out to whom it may concern.
+          </div>
         </div>
       </form>
 
-      {/* <Link to="introduction" onClick={createUser}>
+      <br />
+      {/* <Link to="introduction" onClick={createUser} className="btn">
         Continue
       </Link> */}
-      <br />
       <Link to="introduction" className="btn">
         Continue
       </Link>
@@ -204,6 +188,7 @@ function LandingPage() {
               <h1>Email: {user.email}</h1>
               {/* ---CRU(D)--- */}
               <button
+                className="btn"
                 onClick={() => {
                   deleteUser(user.id);
                 }}
