@@ -44,9 +44,12 @@
     0.3em 0.3em 1em rgba(0, 0, 0, 0.3);
 }
 
-.text {
+.introductionContainer {
+  background-color: #ffffff;
+  max-width: 1500px;
   padding-left: 20%;
   padding-right: 20%;
+  margin: 0 auto;
 }
 
 .helpBubble {
