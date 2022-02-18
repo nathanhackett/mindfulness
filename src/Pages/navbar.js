@@ -4,7 +4,7 @@ import { AccountCircle } from "@material-ui/icons";
 
 function Navbar() {
   return (
-    <nav class="navbar">
+    <nav className="navbar">
       {/* https://getbootstrap.com/docs/5.0/components/navbar/ */}
       <span>
         <img src="MMpng.png" alt="MM" height="60px" width="60px" />

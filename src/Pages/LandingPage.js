@@ -22,20 +22,40 @@ function LandingPage() {
   const [newAge, setNewAge] = useState(""); //state to hold user age, initialise as 0
   const [newEmail, setNewEmail] = useState(""); //state to hold user email, initialise as empty string
 
-  const [isValid, setIsValid] = useState(false);
-  const [message, setMessage] = useState("");
+  const [errors, setErrors] = useState("");
 
-  const emailRegex = /\S+@\S+\.\S+/;
+  const handleNameChange = (event) => {
+    const {
+      target: { value },
+    } = event;
+    setErrors({ newName: "" });
+    setNewName(value);
 
-  const validateEmail = (event) => {
-    const newEmail = event.target.value;
-    if (emailRegex.test(newEmail)) {
-      setIsValid(true);
-      setMessage("Your email looks good!");
-    } else {
-      setIsValid(false);
-      setMessage("Please enter a valid email!");
+    let nameReg = new RegExp(/^([^0-9]*)$/).test(value);
+    if (!nameReg) {
+      setErrors({ newName: "Invalid name" });
     }
+  };
+
+  const handleEmailChange = (event) => {
+    const {
+      target: { value },
+    } = event;
+    setErrors({ newEmail: "" });
+    setNewEmail(value);
+
+    let emailReg = new RegExp(
+      /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/
+    ).test(value);
+    if (!emailReg) {
+      setErrors({ newEmail: "Invalid email format" });
+    }
+  };
+
+  const buttonDisable = () => {
+    //if error.name = false && error.email = false, return false, else return true
+    //or
+    //if all fields = !empty, then false
   };
 
   const ages = [
@@ -110,21 +130,22 @@ function LandingPage() {
           <TextField
             className="formInput"
             id="standard-basic"
-            label="Name"
+            label="Full Name"
             variant="standard"
-            type="text"
-            helperText="Please enter your full name"
-            onChange={(event) => {
-              setNewName(event.target.value);
-            }}
+            value={newName}
+            error={Boolean(errors?.newName)}
+            helperText={errors?.newName}
+            onChange={handleNameChange}
+            required
           />
         </div>
         <div className="formFields">
           <TextField
             className="formInput"
+            required
             select
             label="Age"
-            helperText="Please select your age bracket"
+            // helperText="Please select your age bracket"
             variant="standard"
             onChange={(event) => {
               setNewAge(event.target.value);
@@ -144,22 +165,20 @@ function LandingPage() {
             id="standard-basic"
             label="Email"
             variant="standard"
-            type="email"
-            helperText="Please enter your email"
-            onChange={(event) => {
-              setNewEmail(event.target.value);
-            }}
+            value={newEmail}
+            error={Boolean(errors?.newEmail)}
+            helperText={errors?.newEmail}
+            onChange={handleEmailChange}
+            required
           />
-          <div className={`message ${isValid ? "success" : "error"}`}>
-            {message}
-          </div>
+          <br />
           <br />
         </div>
         <div className="helpBubble">
-          <p class="speechHover" style={{ color: "grey" }}>
+          <p className="speechHover" style={{ color: "grey" }}>
             Why do we need this information?
           </p>
-          <div class="speechBubble">
+          <div className="speechBubble">
             This research is being conducted in accordance with University
             security and privacy policies. <br />
             This information is necessary in identifying demographic patterns in
@@ -171,10 +190,22 @@ function LandingPage() {
       </form>
 
       <br />
-      {/* <Link to="introduction" onClick={createUser} className="btn">
+
+      <Link to="introduction" onClick={createUser} className="btn">
         Continue
-      </Link> */}
-      <Link to="introduction" className="btn">
+      </Link>
+
+      <button disabled={false} className="btn">
+        <Link to="introduction" onClick={createUser}>
+          Continue
+        </Link>
+      </button>
+
+      <Link
+        to="introduction"
+        className="btn"
+        onClick={(e) => e.preventDefault()}
+      >
         Continue
       </Link>
 

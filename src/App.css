@@ -20,6 +20,7 @@
 .formFields {
   background-color: rgb(255, 255, 255);
   max-width: max-content;
+  padding-top: 10px;
   margin: 0 auto;
 }
 
@@ -42,6 +43,7 @@
   width: 200px;
   box-shadow: inset 0 -3em 3em rgba(255, 255, 255, 0.1), 0 0 0 1px #cecece,
     0.3em 0.3em 1em rgba(0, 0, 0, 0.3);
+  /* pointer-events: none; */
 }
 
 .introductionContainer {
