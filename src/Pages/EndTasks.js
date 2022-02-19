@@ -1,5 +1,6 @@
 import React from "react";
 import { Link } from "react-router-dom";
+import { Button } from "@mui/material";
 
 export default function EndTasks() {
   return (
@@ -16,9 +17,14 @@ export default function EndTasks() {
           <b> Toronto Mindfulness Scale (TMS)</b>, a measure
         </p>
       </div>
-      <Link to={{ pathname: "/tms" }} className="btn">
+      <Button
+        component={Link}
+        to={{ pathname: "/tms" }}
+        className="btn"
+        style={{ textTransform: "capitalize", color: "grey" }}
+      >
         Continue
-      </Link>
+      </Button>
     </div>
   );
 }

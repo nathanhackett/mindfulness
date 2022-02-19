@@ -1,5 +1,6 @@
 import React from "react";
 import { Link } from "react-router-dom";
+import { Button } from "@mui/material";
 
 export default function Task4() {
   return (
@@ -7,7 +8,14 @@ export default function Task4() {
       <Link to={{ pathname: "/tutorialEnd" }}>
         <h1>{window.location.pathname}</h1>
       </Link>
-      <Link to={{ pathname: "/task5" }}>Continue</Link>
+      <Button
+        component={Link}
+        to={{ pathname: "/task5" }}
+        className="btn"
+        style={{ textTransform: "capitalize", color: "grey" }}
+      >
+        Continue
+      </Button>
     </div>
   );
 }

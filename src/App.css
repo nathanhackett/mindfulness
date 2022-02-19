@@ -22,7 +22,6 @@
   box-shadow: inset 0 -3em 3em rgba(255, 255, 255, 0.1), 0 0 0 1px #cecece,
     0.3em 0.3em 1em rgba(0, 0, 0, 0.3);
   /* pointer-events: none; */
-  margin: 10px;
 }
 
 .btnContainer {
@@ -53,7 +52,7 @@
 .responseFields {
   background-color: rgb(255, 255, 255);
   max-width: max-content;
-  padding-top: 10px;
+  padding-top: 20px;
   margin: 0 auto;
 }
 
@@ -79,6 +78,17 @@
   background-color: #ffffff;
   max-width: 300px;
   margin: 0 auto;
+}
+
+.speechBubbleTemplate {
+  position: absolute;
+  padding: 20px;
+  margin-left: 200px;
+  max-width: 300px;
+  color: grey;
+  background-color: #fff;
+  border-radius: 25px;
+  box-shadow: 2px 2px 4px #888;
 }
 
 .speechBubble {

@@ -11,11 +11,11 @@ import {
 import { Link } from "react-router-dom";
 //frontend imports
 import "../App.css";
-import { TextField } from "@material-ui/core";
+import { TextField } from "@mui/material";
 import { MenuItem } from "@material-ui/core";
-import { Button } from "@material-ui/core";
+import { Button } from "@mui/material";
 
-function LandingPage() {
+export default function LandingPage() {
   const [users, setUsers] = useState([]); //state to hold users, initialise as empty array
   const userCollection = collection(db, "users"); //variable to reference Firestore collection
 
@@ -46,7 +46,7 @@ function LandingPage() {
     setNewEmail(value);
 
     let emailReg = new RegExp(
-      /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/
+      /^(([^<>()\]\\.,;:\s@"]+(\.[^<>()\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/
     ).test(value);
     if (!emailReg) {
       setErrors({ newEmail: "Invalid email format" });
@@ -133,12 +133,14 @@ function LandingPage() {
         <div className="formFields">
           <TextField
             className="formInput"
-            id="standard-basic"
-            label="Full Name"
-            variant="standard"
+            id="outlined-basic"
+            label="Name"
+            variant="outlined"
             value={newName}
             error={Boolean(errors?.newName)}
-            helperText={errors?.newName}
+            helperText={
+              errors?.newName !== true && "Please enter your Full name"
+            }
             onChange={handleNameChange}
             required
           />
@@ -148,9 +150,10 @@ function LandingPage() {
             className="formInput"
             required
             select
+            id="outlined-basic"
             label="Age"
-            //helperText="Please select your age bracket"
-            variant="standard"
+            variant="outlined"
+            helperText="Please select your age bracket"
             onChange={(event) => {
               setNewAge(event.target.value);
             }}
@@ -166,18 +169,21 @@ function LandingPage() {
         <div className="formFields">
           <TextField
             className="formInput"
-            id="standard-basic"
+            id="outlined-basic"
             label="Email"
-            variant="standard"
+            variant="outlined"
             value={newEmail}
             error={Boolean(errors?.newEmail)}
-            helperText={errors?.newEmail}
+            helperText={
+              errors?.newEmail !== true && "Please enter your MU mail"
+            }
             onChange={handleEmailChange}
             required
           />
           <br />
           <br />
         </div>
+        <h1>@TODO: Helper text</h1>
         <div className="helpBubble">
           <p className="speechHover" style={{ color: "grey" }}>
             Why do we need this information?
@@ -192,24 +198,17 @@ function LandingPage() {
           </div>
         </div>
       </form>
-
       <br />
 
-      <Link to="introduction" onClick={createUser} className="btn">
-        Continue
-      </Link>
-
-      <Button disabled={false} className="btn">
-        <Link to="introduction">Continue</Link>
-      </Button>
-
-      <Link
+      <Button
+        component={Link}
         to="introduction"
+        disabled={false}
         className="btn"
-        onClick={(e) => e.preventDefault()}
+        style={{ textTransform: "capitalize", color: "grey" }}
       >
         Continue
-      </Link>
+      </Button>
 
       {/* ---C(R)UD--- */}
       <div className="App">
@@ -235,5 +234,3 @@ function LandingPage() {
     </div>
   );
 }
-
-export default LandingPage;

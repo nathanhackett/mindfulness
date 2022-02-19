@@ -1,12 +1,12 @@
 import React from "react";
 import { Link } from "react-router-dom";
+import { Button } from "@mui/material";
 
 export default function SampleSorting() {
   return (
     <div className="App">
-      <Link to="/">
-        <h1>{window.location.pathname}</h1>
-      </Link>
+      <h1>Sample Sorting Task</h1>
+      <br />
       <h1>@TODO: Research drag and drop in ReactJS</h1>
       <h1>@TODO: Pinterest API vs Image list</h1>
       <div className="textContainer">
@@ -16,9 +16,14 @@ export default function SampleSorting() {
           depicted.
         </p>
       </div>
-      <Link to={{ pathname: "/tutorialEnd" }} className="btn">
+      <Button
+        component={Link}
+        to={{ pathname: "/tutorialEnd" }}
+        className="btn"
+        style={{ textTransform: "capitalize", color: "grey" }}
+      >
         Continue
-      </Link>
+      </Button>
     </div>
   );
 }

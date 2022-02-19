@@ -1,12 +1,12 @@
 import React from "react";
 import { Link } from "react-router-dom";
+import { Button } from "@mui/material";
 
 export default function TutorialEnd() {
   return (
     <div className="App">
-      <Link to="/">
-        <h1>{window.location.pathname}</h1>
-      </Link>
+      <h1>Ready?</h1>
+      <br />
       <div className="textContainer">
         <p className="text">
           Well done, you have completed the tutorial! The tasks are as simple as
@@ -20,16 +20,31 @@ export default function TutorialEnd() {
 
       <div className="btnContainer">
         <div>
-          <Link to={{ pathname: "/introduction" }} className="btn">
+          <Button
+            component={Link}
+            to={{ pathname: "/introduction" }}
+            className="btn"
+            style={{
+              textTransform: "capitalize",
+              color: "grey",
+              margin: "10px",
+            }}
+          >
             Repeat Tutorial
-          </Link>
-          <Link
+          </Button>
+          <Button
+            component={Link}
             to={{ pathname: "/task1" }}
             className="btn"
-            style={{ backgroundColor: "#30d34677" }}
+            style={{
+              backgroundColor: "#30d34677",
+              textTransform: "capitalize",
+              color: "grey",
+              margin: "10px",
+            }}
           >
-            Begin
-          </Link>
+            Begin Tasks
+          </Button>
         </div>
       </div>
     </div>

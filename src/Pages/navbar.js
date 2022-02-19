@@ -5,7 +5,7 @@ import { Link } from "react-router-dom";
 
 import { AccountCircle } from "@material-ui/icons";
 
-function Navbar() {
+export default function Navbar() {
   const [profileName, setProfileName] = useState([]);
   const userCollection = collection(db, "users");
 
@@ -21,16 +21,6 @@ function Navbar() {
       <Link to="/">
         <img src="MM.png" alt="MM" height="60px" width="60px" />
       </Link>
-
-      <span className=" navbar-brand mb-0 h1">
-        <div>
-          {window.location.pathname === "/" && "Mindfulness Measure"}
-          {window.location.pathname === "/introduction" && "Introduction"}
-          {window.location.pathname === "/sampleTask" && "Sample Task"}
-          {window.location.pathname === "/sampleSort" && "Sample Sort"}
-          {window.location.pathname === "/tutorialEnd" && "Ready?"}
-        </div>
-      </span>
       <div
         style={{
           display: "flex",
@@ -40,12 +30,13 @@ function Navbar() {
         {profileName.map((profile) => {
           return <div>{profile.name}</div>;
         })}
-        <AccountCircle
-          fontSize="large"
-          style={{ marginTop: "-2px", marginLeft: "10px" }}
-        />
+        {window.location.pathname !== "/" && (
+          <AccountCircle
+            fontSize="large"
+            style={{ marginTop: "-2px", marginLeft: "10px" }}
+          />
+        )}
       </div>
     </nav>
   );
 }
-export default Navbar;

@@ -1,9 +1,10 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import "../App.css";
-import { TextField } from "@material-ui/core";
+import TextField from "@mui/material/TextField";
 import { ImageList } from "@material-ui/core";
 import { ImageListItem } from "@material-ui/core";
+import { Button } from "@mui/material";
 
 const itemData = [
   {
@@ -15,9 +16,8 @@ const itemData = [
 export default function SampleTask() {
   return (
     <div className="App">
-      <Link to="/">
-        <h1>{window.location.pathname}</h1>
-      </Link>
+      <h1>Sample Task</h1>
+      <br />
       <h1>@TODO: Pinterest API or hardcode image set</h1>
       <div className="imagesContainer">
         <ImageList cols={1} rowHeight={300}>
@@ -37,27 +37,24 @@ export default function SampleTask() {
         <div className="responseFields">
           <TextField
             className="responseInput"
-            id="standard-basic"
+            id="outlined-basic"
             label="What do you see in the image above?"
-            variant="standard"
+            variant="outlined"
           />
         </div>
 
         <div className="responseFields">
           <TextField
             className="responseInput"
-            id="standard-basic"
+            id="outlined-basic"
             label="Does this image mean anything to you?"
-            variant="standard"
+            variant="outlined"
           />
           <br />
           <br />
         </div>
         <div className="helpBubble">
-          <p className="speechHover" style={{ color: "grey" }}>
-            Why do we need this information?
-          </p>
-          <div className="speechBubble">
+          <div className="speechBubbleTemplate">
             This research is being conducted in accordance with University
             security and privacy policies. <br />
             This information is necessary in identifying demographic patterns in
@@ -67,9 +64,15 @@ export default function SampleTask() {
           </div>
         </div>
       </form>
-      <Link to={{ pathname: "/sampleSort" }} className="btn">
+
+      <Button
+        component={Link}
+        to={{ pathname: "/sampleSort" }}
+        className="btn"
+        style={{ textTransform: "capitalize", color: "grey" }}
+      >
         Continue
-      </Link>
+      </Button>
     </div>
   );
 }

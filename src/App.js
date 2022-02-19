@@ -1,6 +1,6 @@
 import React from "react";
 import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
-import { createTheme, ThemeProvider } from "@material-ui/core";
+import { createTheme, ThemeProvider } from "@mui/material";
 
 import Navbar from "./Pages/Navbar";
 import LandingPage from "./Pages/LandingPage";
@@ -29,7 +29,7 @@ const theme = createTheme({
   },
 });
 
-function App() {
+export default function App() {
   return (
     <ThemeProvider theme={theme}>
       <Router>
@@ -54,5 +54,3 @@ function App() {
     </ThemeProvider>
   );
 }
-
-export default App;
