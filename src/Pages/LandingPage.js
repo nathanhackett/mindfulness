@@ -151,9 +151,9 @@ function LandingPage() {
               setNewAge(event.target.value);
             }}
           >
-            {ages.map((option) => (
-              <MenuItem key={option.value} value={option.value}>
-                {option.label}
+            {ages.map((age) => (
+              <MenuItem key={age.value} value={age.value}>
+                {age.label}
               </MenuItem>
             ))}
           </TextField>

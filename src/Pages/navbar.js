@@ -16,6 +16,8 @@ function Navbar() {
     );
   }, []);
 
+  useEffect(() => {});
+
   return (
     <nav className="navbar">
       {/* https://getbootstrap.com/docs/5.0/components/navbar/ */}
@@ -25,12 +27,16 @@ function Navbar() {
       <span className=" navbar-brand mb-0 h1">
         <div>{window.location.pathname}</div>
       </span>
-      <span>
+      <div
+        style={{
+          display: "flex",
+        }}
+      >
         {profileName.map((profile) => {
           return <div>{profile.name}</div>;
         })}
-        <AccountCircle fontSize="large" />
-      </span>
+        <AccountCircle fontSize="large" style={{ marginLeft: "10px" }} />
+      </div>
     </nav>
   );
 }
