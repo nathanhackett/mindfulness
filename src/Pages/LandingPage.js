@@ -13,6 +13,7 @@ import { Link } from "react-router-dom";
 import "../App.css";
 import { TextField } from "@material-ui/core";
 import { MenuItem } from "@material-ui/core";
+import { Button } from "@material-ui/core";
 
 function LandingPage() {
   const [users, setUsers] = useState([]); //state to hold users, initialise as empty array
@@ -59,6 +60,9 @@ function LandingPage() {
   };
 
   const ages = [
+    {
+      default: "",
+    },
     {
       value: "<12",
       label: "<12",
@@ -145,7 +149,7 @@ function LandingPage() {
             required
             select
             label="Age"
-            // helperText="Please select your age bracket"
+            //helperText="Please select your age bracket"
             variant="standard"
             onChange={(event) => {
               setNewAge(event.target.value);
@@ -195,9 +199,9 @@ function LandingPage() {
         Continue
       </Link>
 
-      <button disabled={false} className="btn">
+      <Button disabled={false} className="btn">
         <Link to="introduction">Continue</Link>
-      </button>
+      </Button>
 
       <Link
         to="introduction"
@@ -212,9 +216,9 @@ function LandingPage() {
         {users.map((user) => {
           return (
             <div>
-              <h1>Name: {user.name}</h1>
-              <h1>Age: {user.age}</h1>
-              <h1>Email: {user.email}</h1>
+              <h3>Name: {user.name}</h3>
+              <h3>Age: {user.age}</h3>
+              <h3>Email: {user.email}</h3>
               {/* ---CRU(D)--- */}
               <button
                 className="btn"

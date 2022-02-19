@@ -7,7 +7,18 @@ export default function EndTasks() {
       <Link to={{ pathname: "/taskEnd" }}>
         <h1>{window.location.pathname}</h1>
       </Link>
-      <Link to={{ pathname: "/tms" }}>Continue</Link>
+      <div className="textContainer">
+        <p className="text">
+          Now that you have completed the tasks, we need your feedback!
+          <br />
+          <br />
+          The following page will present you with the
+          <b> Toronto Mindfulness Scale (TMS)</b>, a measure
+        </p>
+      </div>
+      <Link to={{ pathname: "/tms" }} className="btn">
+        Continue
+      </Link>
     </div>
   );
 }
