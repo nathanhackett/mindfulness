@@ -16,7 +16,7 @@ import { MenuItem } from "@material-ui/core";
 
 function LandingPage() {
   const [users, setUsers] = useState([]); //state to hold users, initialise as empty array
-  const userCollection = collection(db, "users"); //variable to reference user information from Firestore collection
+  const userCollection = collection(db, "users"); //variable to reference Firestore collection
 
   const [newName, setNewName] = useState(""); //state to hold user name, initialise as empty string
   const [newAge, setNewAge] = useState(""); //state to hold user age, initialise as 0
@@ -196,9 +196,7 @@ function LandingPage() {
       </Link>
 
       <button disabled={false} className="btn">
-        <Link to="introduction" onClick={createUser}>
-          Continue
-        </Link>
+        <Link to="introduction">Continue</Link>
       </button>
 
       <Link
