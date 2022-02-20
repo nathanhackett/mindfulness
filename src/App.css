@@ -9,8 +9,8 @@
   flex-grow: 1;
   background-color: #78b8c2;
   padding: 15px;
-  padding-inline-start: 3%;
-  padding-inline-end: 3%;
+  padding-inline-start: 30px;
+  padding-inline-end: 30px;
   color: rgb(255, 255, 255);
   font-size: larger;
 }
@@ -115,6 +115,7 @@
   position: static;
   padding-left: 30%;
   padding-right: 30%;
-  max-height: fit-content;
+  max-height: min-content;
   background-color: rgb(255, 255, 255);
+  display: table-row-group;
 }

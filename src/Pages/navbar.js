@@ -21,6 +21,7 @@ export default function Navbar() {
       <Link to="/">
         <img src="MM.png" alt="MM" height="60px" width="60px" />
       </Link>
+
       <div
         style={{
           display: "flex",

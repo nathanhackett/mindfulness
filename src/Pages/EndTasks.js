@@ -6,7 +6,7 @@ export default function EndTasks() {
   return (
     <div className="App">
       <Link to={{ pathname: "/taskEnd" }}>
-        <h1>{window.location.pathname}</h1>
+        <h1>One Last Thing!</h1>
       </Link>
       <div className="textContainer">
         <p className="text">

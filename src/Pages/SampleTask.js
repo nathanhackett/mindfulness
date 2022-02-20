@@ -2,8 +2,8 @@ import React from "react";
 import { Link } from "react-router-dom";
 import "../App.css";
 import TextField from "@mui/material/TextField";
-import { ImageList } from "@material-ui/core";
-import { ImageListItem } from "@material-ui/core";
+import { ImageList } from "@mui/material";
+import { ImageListItem } from "@mui/material";
 import { Button } from "@mui/material";
 
 const itemData = [
@@ -18,14 +18,22 @@ export default function SampleTask() {
     <div className="App">
       <h1>Sample Task</h1>
       <br />
-      {/* @TODO: Pinterest API or hardcode image set */}
-      {/* @TODO: Help text bubbles */}
-      <div className="imagesContainer">
-        <ImageList cols={1} rowHeight={300}>
+      @TODO: Pinterest API or hardcode image set @TODO: Help text bubbles
+      <br />
+      <div
+        style={{
+          paddingLeft: "30%",
+          paddingRight: "30%",
+          display: "inline-block",
+          width: "fit-content",
+        }}
+      >
+        <ImageList cols={1}>
           {itemData.map((item) => (
             <ImageListItem key={item.img}>
               <img
                 src={`${item.img}?fit=crop&auto=format`}
+                srcSet={`${item.img}?fit=crop&auto=format&dpr=2 2x`}
                 alt={item.title}
                 loading="lazy"
               />
@@ -33,7 +41,6 @@ export default function SampleTask() {
           ))}
         </ImageList>
       </div>
-
       <form className="formContainer">
         <div className="responseFields">
           <TextField
@@ -65,7 +72,6 @@ export default function SampleTask() {
           </div>
         </div>
       </form>
-
       <Button
         component={Link}
         to={{ pathname: "/sampleSort" }}
