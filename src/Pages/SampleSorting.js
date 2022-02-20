@@ -7,8 +7,8 @@ export default function SampleSorting() {
     <div className="App">
       <h1>Sample Sorting Task</h1>
       <br />
-      <h1>@TODO: Research drag and drop in ReactJS</h1>
-      <h1>@TODO: Pinterest API vs Image list</h1>
+      {/* @TODO: Research drag and drop in ReactJS */}
+      {/* @TODO: Pinterest API vs Image list */}
       <div className="textContainer">
         <p className="text">
           Based on the above images, please sort them (Drag & Drop){" "}

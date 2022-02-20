@@ -18,7 +18,8 @@ export default function SampleTask() {
     <div className="App">
       <h1>Sample Task</h1>
       <br />
-      <h1>@TODO: Pinterest API or hardcode image set</h1>
+      {/* @TODO: Pinterest API or hardcode image set */}
+      {/* @TODO: Help text bubbles */}
       <div className="imagesContainer">
         <ImageList cols={1} rowHeight={300}>
           {itemData.map((item) => (

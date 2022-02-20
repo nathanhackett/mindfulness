@@ -30,6 +30,7 @@ export default function Navbar() {
         {profileName.map((profile) => {
           return <div>{profile.name}</div>;
         })}
+        {/* @TODO: Fix avatar conditional rendering */}
         {window.location.pathname !== "/" && (
           <AccountCircle
             fontSize="large"

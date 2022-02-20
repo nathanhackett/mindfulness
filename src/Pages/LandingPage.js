@@ -183,7 +183,7 @@ export default function LandingPage() {
           <br />
           <br />
         </div>
-        <h1>@TODO: Helper text</h1>
+        {/* @TODO: Fix Helper text */}
         <div className="helpBubble">
           <p className="speechHover" style={{ color: "grey" }}>
             Why do we need this information?
