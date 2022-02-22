@@ -1,7 +1,17 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import { Button } from "@mui/material";
-import { DataGrid } from "@mui/x-data-grid";
+import { FormControl } from "@mui/material";
+import { MenuItem } from "@mui/material";
+import Table from "@material-ui/core/Table";
+import TableBody from "@material-ui/core/TableBody";
+import TableCell from "@material-ui/core/TableCell";
+import TableContainer from "@material-ui/core/TableContainer";
+import TableHead from "@material-ui/core/TableHead";
+import TableRow from "@material-ui/core/TableRow";
+import Paper from "@material-ui/core/Paper";
+import { useState } from "react";
+import { TextField } from "@mui/material";
 
 const rating = [
   {
@@ -26,32 +36,6 @@ const rating = [
   {
     value: "4",
     label: "4",
-  },
-];
-
-const columns = [
-  {
-    field: "rate",
-    headerName: "Rate 0-4",
-    type: "number",
-    width: 100,
-    editable: true,
-  },
-  {
-    field: "itemNo",
-    headerName: "Item #",
-    type: "number",
-    width: 80,
-    sortable: false,
-    valueGetter: (params) => `${params.row.id || ""}`,
-  },
-  {
-    field: "item",
-    headerName: "Item",
-    sortable: false,
-    flex: 1,
-    minWidth: 500,
-    flexShrink: 1,
   },
 ];
 
@@ -124,19 +108,58 @@ const rows = [
 ];
 
 export default function TMS() {
+  const [ratings, setRatings] = useState("");
+
+  const handleRatingChange = (event) => {
+    setRatings(event.target.value);
+  };
+
   return (
     <div className="App">
       <Link to={{ pathname: "/taskEnd" }}>
         <h1>Toronto Mindfulness Scale</h1>
       </Link>
-      <div style={{ height: 500, width: "100%" }}>
-        <DataGrid
-          rows={rows}
-          columns={columns}
-          pageSize={13}
-          rowsPerPageOptions={[13]}
-        />
-      </div>
+      @TODO: Fix Rating Selection (Dropdown, Range of 0-4) @TODO: Link rating
+      selection to firebase doc
+      <TableContainer component={Paper}>
+        <Table aria-label="simple table">
+          <TableHead>
+            <TableRow>
+              <TableCell align="center">Rate</TableCell>
+              <TableCell align="center">Item No.</TableCell>
+              <TableCell align="center">Item</TableCell>
+            </TableRow>
+          </TableHead>
+          <TableBody>
+            {rows.map((row) => (
+              <TableRow key={row.id}>
+                <TableCell component="th" scope="row">
+                  <FormControl
+                    variant="standard"
+                    style={{ width: "100%", textAlign: "center" }}
+                  >
+                    <TextField
+                      required
+                      select
+                      id="outlined-basic"
+                      variant="standard"
+                      onChange={handleRatingChange}
+                    >
+                      {rating.map((rate) => (
+                        <MenuItem key={rate.value} value={rate.value}>
+                          {rate.label}
+                        </MenuItem>
+                      ))}
+                    </TextField>
+                  </FormControl>
+                </TableCell>
+                <TableCell align="right">{row.id}</TableCell>
+                <TableCell align="left">{row.item}</TableCell>
+              </TableRow>
+            ))}
+          </TableBody>
+        </Table>
+      </TableContainer>
       <br />
       <Button
         component={Link}
