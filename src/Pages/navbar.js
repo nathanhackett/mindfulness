@@ -28,9 +28,9 @@ export default function Navbar() {
           marginTop: "5px",
         }}
       >
-        {profileName.map((profile) => {
+        {/* {profileName.map((profile) => {
           return <div>{profile.name}</div>;
-        })}
+        })} */}
         {/* @TODO: Fix avatar conditional rendering */}
         {window.location.pathname !== "/" && (
           <AccountCircle

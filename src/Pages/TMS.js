@@ -119,13 +119,13 @@ export default function TMS() {
       <Link to={{ pathname: "/taskEnd" }}>
         <h1>Toronto Mindfulness Scale</h1>
       </Link>
-      @TODO: Fix Rating Selection (Dropdown, Range of 0-4) @TODO: Link rating
+      @TODO: Restructure table row/cell if necessary @TODO: Link rating
       selection to firebase doc
       <TableContainer component={Paper}>
         <Table aria-label="simple table">
           <TableHead>
             <TableRow>
-              <TableCell align="center">Rate</TableCell>
+              <TableCell align="center">Rate 0-4</TableCell>
               <TableCell align="center">Item No.</TableCell>
               <TableCell align="center">Item</TableCell>
             </TableRow>

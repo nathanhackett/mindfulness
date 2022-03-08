@@ -1,4 +1,16 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
+import { db } from "../firebase";
+import {
+  collection,
+  getDocs,
+  addDoc,
+  deleteDoc,
+  userDoc,
+  doc,
+  updateDoc,
+  setDoc,
+  Timestamp,
+} from "firebase/firestore";
 import { Link } from "react-router-dom";
 import "../App.css";
 import TextField from "@mui/material/TextField";
@@ -14,6 +26,18 @@ const itemData = [
 ];
 
 export default function SampleTask() {
+  const [ans1, setAns1] = useState("");
+  const [ans2, setAns2] = useState("");
+
+  const handleSubmit = async () => {
+    const docRef = doc(db, "users", "one");
+    const docData = {
+      answer1: ans1,
+      answer2: ans2,
+    };
+    await updateDoc(docRef, docData);
+  };
+
   return (
     <div className="App">
       <h1>Sample Task</h1>
@@ -48,6 +72,10 @@ export default function SampleTask() {
             id="outlined-basic"
             label="What do you see in the image above?"
             variant="outlined"
+            value={ans1}
+            onChange={(event) => {
+              setAns1(event.target.value);
+            }}
           />
         </div>
 
@@ -57,6 +85,10 @@ export default function SampleTask() {
             id="outlined-basic"
             label="Does this image mean anything to you?"
             variant="outlined"
+            value={ans2}
+            onChange={(event) => {
+              setAns2(event.target.value);
+            }}
           />
           <br />
           <br />
@@ -77,6 +109,7 @@ export default function SampleTask() {
         to={{ pathname: "/sampleSort" }}
         className="btn"
         style={{ textTransform: "capitalize", color: "grey" }}
+        onClick={handleSubmit}
       >
         Continue
       </Button>

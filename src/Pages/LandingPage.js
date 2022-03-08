@@ -7,6 +7,7 @@ import {
   addDoc,
   deleteDoc,
   doc,
+  setDoc,
 } from "firebase/firestore";
 import { Link } from "react-router-dom";
 //frontend imports
@@ -206,6 +207,7 @@ export default function LandingPage() {
         disabled={false}
         className="btn"
         style={{ textTransform: "capitalize", color: "grey" }}
+        onClick={createUser}
       >
         Continue
       </Button>
