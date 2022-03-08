@@ -10,6 +10,12 @@ import {
   setDoc,
 } from "firebase/firestore";
 import { Link } from "react-router-dom";
+import { auth } from "../firebase";
+import {
+  createUserWithEmailAndPassword,
+  signInWithEmailAndPassword,
+  signOut,
+} from "firebase/auth";
 //frontend imports
 import "../App.css";
 import { TextField } from "@mui/material";
@@ -17,6 +23,47 @@ import { MenuItem } from "@material-ui/core";
 import { Button } from "@mui/material";
 
 export default function LandingPage() {
+  const [newName, setNewName] = useState(""); //state to hold user name, initialise as empty string
+  const [newAge, setNewAge] = useState(""); //state to hold user age, initialise as 0
+  const [newEmail, setNewEmail] = useState(""); //state to hold user email, initialise as empty string
+  const [newPassword, setNewPassword] = useState("");
+  const [loginEmail, setLoginEmail] = useState("");
+  const [loginPassword, setLoginPassword] = useState("");
+
+  const signUp = async () => {
+    try {
+      const user = await createUserWithEmailAndPassword(
+        auth,
+        newEmail,
+        newPassword
+      ); //await function will return promise, user information stored in "user"
+      console.log(user);
+    } catch (error) {
+      console.log(error.message);
+    }
+  };
+
+  const login = async () => {
+    try {
+      const user = await signInWithEmailAndPassword(
+        auth,
+        loginEmail,
+        loginPassword
+      ); //await function will return promise, user information stored in "user"
+      console.log(user);
+    } catch (error) {
+      console.log(error.message);
+    }
+  };
+
+  const logout = async () => {
+    await signOut(auth);
+  };
+
+  const resetPassword = () => {};
+
+  {
+    /*
   const [users, setUsers] = useState([]); //state to hold users, initialise as empty array
   const userCollection = collection(db, "users"); //variable to reference Firestore collection
 
@@ -59,6 +106,8 @@ export default function LandingPage() {
     //or
     //if all fields = !empty, then false
   };
+*/
+  }
 
   const ages = [
     {
@@ -94,6 +143,8 @@ export default function LandingPage() {
     },
   ];
 
+  {
+    /*
   //---(C)RUD---
   const createUser = async () => {
     await addDoc(userCollection, {
@@ -122,6 +173,8 @@ export default function LandingPage() {
     const userDoc = doc(db, "users", id);
     await deleteDoc(userDoc);
   };
+  */
+  }
 
   return (
     <div className="App">
@@ -137,19 +190,16 @@ export default function LandingPage() {
             id="outlined-basic"
             label="Name"
             variant="outlined"
-            value={newName}
-            error={Boolean(errors?.newName)}
-            helperText={
-              errors?.newName !== true && "Please enter your Full name"
-            }
-            onChange={handleNameChange}
+            helperText="Please enter your Full name"
+            onChange={(event) => {
+              setNewName(event.target.value);
+            }}
             required
           />
         </div>
         <div className="formFields">
           <TextField
             className="formInput"
-            required
             select
             id="outlined-basic"
             label="Age"
@@ -158,6 +208,7 @@ export default function LandingPage() {
             onChange={(event) => {
               setNewAge(event.target.value);
             }}
+            required
           >
             {ages.map((age) => (
               <MenuItem key={age.value} value={age.value}>
@@ -166,24 +217,34 @@ export default function LandingPage() {
             ))}
           </TextField>
         </div>
-
         <div className="formFields">
           <TextField
             className="formInput"
             id="outlined-basic"
             label="Email"
             variant="outlined"
-            value={newEmail}
-            error={Boolean(errors?.newEmail)}
-            helperText={
-              errors?.newEmail !== true && "Please enter your MU mail"
-            }
-            onChange={handleEmailChange}
+            helperText="Please enter your MU mail"
+            onChange={(event) => {
+              setNewEmail(event.target.value);
+            }}
             required
           />
-          <br />
-          <br />
         </div>
+        <div className="formFields">
+          <TextField
+            className="formInput"
+            id="outlined-basic"
+            label="Password"
+            type="password"
+            variant="outlined"
+            helperText="Please enter a simple password"
+            onChange={(event) => {
+              setNewPassword(event.target.value);
+            }}
+            required
+          />
+        </div>
+        <br />
         {/* @TODO: Fix Helper text */}
         <div className="helpBubble">
           <p className="speechHover" style={{ color: "grey" }}>
@@ -199,6 +260,7 @@ export default function LandingPage() {
           </div>
         </div>
       </form>
+
       <br />
 
       <Button
@@ -207,12 +269,56 @@ export default function LandingPage() {
         disabled={false}
         className="btn"
         style={{ textTransform: "capitalize", color: "grey" }}
-        onClick={createUser}
+        // onClick={createUser}
+        onClick={signUp}
       >
         Continue
       </Button>
+      <Button className="btn" onClick={logout}>
+        Sign Out
+      </Button>
+      <form className="formContainer">
+        <div className="formFields">
+          <TextField
+            className="formInput"
+            id="outlined-basic"
+            label="Email"
+            variant="outlined"
+            helperText="Please enter your MU mail"
+            onChange={(event) => {
+              setLoginEmail(event.target.value);
+            }}
+            required
+          />
+        </div>
+        <div className="formFields">
+          <TextField
+            className="formInput"
+            id="outlined-basic"
+            label="Password"
+            type="password"
+            variant="outlined"
+            helperText="Please enter a simple password"
+            onChange={(event) => {
+              setLoginPassword(event.target.value);
+            }}
+            required
+          />
+        </div>
+      </form>
+      <Button
+        component={Link}
+        to="introduction"
+        disabled={false}
+        className="btn"
+        style={{ textTransform: "capitalize", color: "grey" }}
+        // onClick={createUser}
+        onClick={login}
+      >
+        Login
+      </Button>
 
-      {/* ---C(R)UD--- */}
+      {/* ---C(R)UD--- 
       <div className="App">
         {users.map((user) => {
           return (
@@ -220,7 +326,7 @@ export default function LandingPage() {
               <h3>Name: {user.name}</h3>
               <h3>Age: {user.age}</h3>
               <h3>Email: {user.email}</h3>
-              {/* ---CRU(D)--- */}
+              {/* ---CRU(D)--- 
               <button
                 className="btn"
                 onClick={() => {
@@ -232,7 +338,7 @@ export default function LandingPage() {
             </div>
           );
         })}
-      </div>
+      </div> */}
     </div>
   );
 }

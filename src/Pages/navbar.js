@@ -1,11 +1,21 @@
 import React, { useEffect, useState } from "react";
 import { db } from "../firebase";
 import { collection, onSnapshot } from "firebase/firestore";
+import { auth } from "../firebase";
+import { onAuthStateChanged } from "firebase/auth";
 import { Link } from "react-router-dom";
+import { NavbarModal } from "./NavbarModal";
 
 import { AccountCircle } from "@material-ui/icons";
+import { Button } from "@mui/material";
 
 export default function Navbar() {
+  const [user, setUser] = useState({});
+
+  onAuthStateChanged(auth, (currentUser) => {
+    setUser(currentUser);
+  });
+
   const [profileName, setProfileName] = useState([]);
   const userCollection = collection(db, "users");
 
@@ -28,16 +38,21 @@ export default function Navbar() {
           marginTop: "5px",
         }}
       >
-        {/* {profileName.map((profile) => {
-          return <div>{profile.name}</div>;
-        })} */}
+        {user?.email}
         {/* @TODO: Fix avatar conditional rendering */}
-        {window.location.pathname !== "/" && (
+        {/* {window.location.pathname !== "/" && (
           <AccountCircle
             fontSize="large"
             style={{ marginTop: "-2px", marginLeft: "10px" }}
           />
-        )}
+        )} */}
+
+        <button onClick={setUser}>
+          <AccountCircle
+            fontSize="large"
+            style={{ marginTop: "-2px", marginLeft: "10px" }}
+          />
+        </button>
       </div>
     </nav>
   );
