@@ -1,20 +1,19 @@
 //backend imports
 import React, { useState, useEffect } from "react";
-import { db } from "../firebase";
-import {
-  collection,
-  getDocs,
-  addDoc,
-  deleteDoc,
-  doc,
-  setDoc,
-} from "firebase/firestore";
-import { Link } from "react-router-dom";
+// import { db } from "../firebase";
+// import {
+//   collection,
+//   getDocs,
+//   addDoc,
+//   deleteDoc,
+//   doc,
+//   setDoc,
+// } from "firebase/firestore";
+import { useNavigate } from "react-router-dom";
 import { auth } from "../firebase";
 import {
   createUserWithEmailAndPassword,
   signInWithEmailAndPassword,
-  signOut,
 } from "firebase/auth";
 //frontend imports
 import "../App.css";
@@ -30,6 +29,10 @@ export default function LandingPage() {
   const [loginEmail, setLoginEmail] = useState("");
   const [loginPassword, setLoginPassword] = useState("");
 
+  const navigate = useNavigate();
+  const [signUpError, setSignUpError] = useState("");
+  const [loginError, setloginError] = useState("");
+
   const signUp = async () => {
     try {
       const user = await createUserWithEmailAndPassword(
@@ -37,9 +40,12 @@ export default function LandingPage() {
         newEmail,
         newPassword
       ); //await function will return promise, user information stored in "user"
+      //auth();
+      navigate("/introduction");
       console.log(user);
     } catch (error) {
       console.log(error.message);
+      setSignUpError("Invalid Email/Password");
     }
   };
 
@@ -50,17 +56,14 @@ export default function LandingPage() {
         loginEmail,
         loginPassword
       ); //await function will return promise, user information stored in "user"
+      //auth();
+      navigate("/introduction");
       console.log(user);
     } catch (error) {
       console.log(error.message);
+      setloginError("Invalid Email/Password");
     }
   };
-
-  const logout = async () => {
-    await signOut(auth);
-  };
-
-  const resetPassword = () => {};
 
   {
     /*
@@ -109,6 +112,39 @@ export default function LandingPage() {
 */
   }
 
+  {
+    /*
+  //---(C)RUD---
+  const createUser = async () => {
+    await addDoc(userCollection, {
+      name: newName,
+      age: newAge,
+      email: newEmail,
+    });
+  };
+
+  //---C(R)UD---
+  useEffect(() => {
+    //triggers every time component is rendered
+    const getUsers = async () => {
+      //async/await function to request from Firebase
+      //returns promise (i.e. the data in the document in its raw form)
+      //cannot make useEffect async, use async inside hook
+      const data = await getDocs(userCollection); //get collection using reference
+      setUsers(data.docs.map((doc) => ({ ...doc.data(), id: doc.id }))); //append fetched information to users array
+      console.log("updated");
+    };
+    getUsers(); //call function to fetch users from Firebase document
+  }, []); //***fix rerendering
+
+  //---CRU(D)---
+  const deleteUser = async (id) => {
+    const userDoc = doc(db, "users", id);
+    await deleteDoc(userDoc);
+  };
+  */
+  }
+
   const ages = [
     {
       default: "",
@@ -143,41 +179,9 @@ export default function LandingPage() {
     },
   ];
 
-  {
-    /*
-  //---(C)RUD---
-  const createUser = async () => {
-    await addDoc(userCollection, {
-      name: newName,
-      age: newAge,
-      email: newEmail,
-    });
-  };
-
-  //---C(R)UD---
-  useEffect(() => {
-    //triggers every time component is rendered
-    const getUsers = async () => {
-      //async/await function to request from Firebase
-      //returns promise (i.e. the data in the document in its raw form)
-      //cannot make useEffect async, use async inside hook
-      const data = await getDocs(userCollection); //get collection using reference
-      setUsers(data.docs.map((doc) => ({ ...doc.data(), id: doc.id }))); //append fetched information to users array
-      console.log("updated");
-    };
-    getUsers(); //call function to fetch users from Firebase document
-  }, []); //***fix rerendering
-
-  //---CRU(D)---
-  const deleteUser = async (id) => {
-    const userDoc = doc(db, "users", id);
-    await deleteDoc(userDoc);
-  };
-  */
-  }
-
   return (
     <div className="App">
+      @TODO: Authentication for subsequent pages (access and error messages)
       <h1>Mindfulness Meaure</h1>
       <br />
       <h4>A Maynooth University Research Initiative</h4>
@@ -260,23 +264,18 @@ export default function LandingPage() {
           </div>
         </div>
       </form>
-
-      <br />
-
       <Button
-        component={Link}
-        to="introduction"
         disabled={false}
         className="btn"
         style={{ textTransform: "capitalize", color: "grey" }}
-        // onClick={createUser}
         onClick={signUp}
       >
         Continue
       </Button>
-      <Button className="btn" onClick={logout}>
-        Sign Out
-      </Button>
+      <br />
+      <br />
+      <div>{signUpError}</div>
+      <br />
       <form className="formContainer">
         <div className="formFields">
           <TextField
@@ -307,17 +306,16 @@ export default function LandingPage() {
         </div>
       </form>
       <Button
-        component={Link}
-        to="introduction"
         disabled={false}
         className="btn"
         style={{ textTransform: "capitalize", color: "grey" }}
-        // onClick={createUser}
         onClick={login}
       >
         Login
       </Button>
-
+      <br />
+      <br />
+      <div>{loginError}</div>
       {/* ---C(R)UD--- 
       <div className="App">
         {users.map((user) => {

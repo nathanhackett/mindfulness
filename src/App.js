@@ -1,6 +1,14 @@
 import React from "react";
-import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
+import { useState } from "react";
+import { onAuthStateChanged } from "firebase/auth";
+import {
+  BrowserRouter as Router,
+  Navigate,
+  Route,
+  Routes,
+} from "react-router-dom";
 import { createTheme, ThemeProvider } from "@mui/material";
+import { auth } from "./firebase";
 
 import Navbar from "./Pages/Navbar";
 import LandingPage from "./Pages/LandingPage";
@@ -30,13 +38,31 @@ const theme = createTheme({
 });
 
 export default function App() {
+  const [user, setUser] = useState({});
+
+  onAuthStateChanged(auth, (currentUser) => {
+    setUser(currentUser);
+  });
+
   return (
     <ThemeProvider theme={theme}>
       <Router>
         <Navbar />
         <Routes>
-          <Route exact path="/" element={<LandingPage />} />
-          <Route path="/introduction" element={<Introduction />} />
+          {!user && (
+            <Route
+              exact
+              path="/"
+              element={<LandingPage auth={() => setUser(true)} />}
+            />
+          )}
+          {user && (
+            <Route
+              path="/introduction"
+              element={<Introduction auth={() => setUser(false)} />}
+            />
+          )}
+
           <Route path="/sampleTask" element={<SampleTask />} />
           <Route path="/sampleSort" element={<SampleSorting />} />
           <Route path="/tutorialEnd" element={<TutorialEnd />} />
