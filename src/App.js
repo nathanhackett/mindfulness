@@ -1,12 +1,7 @@
 import React from "react";
 import { useState } from "react";
 import { onAuthStateChanged } from "firebase/auth";
-import {
-  BrowserRouter as Router,
-  Navigate,
-  Route,
-  Routes,
-} from "react-router-dom";
+import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
 import { createTheme, ThemeProvider } from "@mui/material";
 import { auth } from "./firebase";
 
@@ -62,19 +57,18 @@ export default function App() {
               element={<Introduction auth={() => setUser(false)} />}
             />
           )}
-
-          <Route path="/sampleTask" element={<SampleTask />} />
-          <Route path="/sampleSort" element={<SampleSorting />} />
-          <Route path="/tutorialEnd" element={<TutorialEnd />} />
-          <Route path="/task1" element={<Task1 />} />
-          <Route path="/task2" element={<Task2 />} />
-          <Route path="/task3" element={<Task3 />} />
-          <Route path="/task4" element={<Task4 />} />
-          <Route path="/task5" element={<Task5 />} />
-          <Route path="/task6" element={<Task6Sorting />} />
-          <Route path="/taskEnd" element={<EndTasks />} />
-          <Route path="/tms" element={<TMS />} />
-          <Route path="/end" element={<End />} />
+          {user && <Route path="/sampleTask" element={<SampleTask />} />}
+          {user && <Route path="/sampleSort" element={<SampleSorting />} />}
+          {user && <Route path="/tutorialEnd" element={<TutorialEnd />} />}
+          {user && <Route path="/task1" element={<Task1 />} />}
+          {user && <Route path="/task2" element={<Task2 />} />}
+          {user && <Route path="/task3" element={<Task3 />} />}
+          {user && <Route path="/task4" element={<Task4 />} />}
+          {user && <Route path="/task5" element={<Task5 />} />}
+          {user && <Route path="/task6" element={<Task6Sorting />} />}
+          {user && <Route path="/taskEnd" element={<EndTasks />} />}
+          {user && <Route path="/tms" element={<TMS />} />}
+          {user && <Route path="/end" element={<End />} />}
         </Routes>
       </Router>
     </ThemeProvider>

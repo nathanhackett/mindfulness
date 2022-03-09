@@ -1,6 +1,4 @@
-import React, { useEffect, useState } from "react";
-import { db } from "../firebase";
-import { collection, onSnapshot } from "firebase/firestore";
+import React, { useState } from "react";
 import { auth } from "../firebase";
 import { onAuthStateChanged, signOut } from "firebase/auth";
 import { Link, useNavigate } from "react-router-dom";
@@ -22,19 +20,10 @@ export default function Navbar() {
     navigate("/");
   };
 
-  const [profileName, setProfileName] = useState([]);
-  const userCollection = collection(db, "users");
-
-  useEffect(() => {
-    onSnapshot(userCollection, (snapshot) =>
-      setProfileName(snapshot.docs.map((doc) => doc.data()))
-    );
-  }, []);
-
   return (
     <nav className="navbar">
       {/* https://getbootstrap.com/docs/5.0/components/navbar/ */}
-      <Link to="/">
+      <Link to="/" onClick={logout}>
         <img src="MM.png" alt="MM" height="60px" width="60px" />
       </Link>
 
@@ -45,21 +34,22 @@ export default function Navbar() {
         }}
       >
         {user?.email}
-        {user && <button onClick={logout}>Logout</button>}
-        {/* @TODO: Fix avatar conditional rendering */}
-        {/* {window.location.pathname !== "/" && (
-          <AccountCircle
-            fontSize="large"
-            style={{ marginTop: "-2px", marginLeft: "10px" }}
-          />
-        )} */}
-
-        <button>
-          <AccountCircle
-            fontSize="large"
-            style={{ marginTop: "-2px", marginLeft: "10px" }}
-          />
-        </button>
+        {user && (
+          <Button
+            style={{ color: "white", textTransform: "capitalize" }}
+            onClick={logout}
+          >
+            Logout
+          </Button>
+        )}
+        {window.location.pathname !== "/" && (
+          <Button className="btn-modal">
+            <AccountCircle
+              fontSize="large"
+              style={{ marginTop: "-2px", color: "white" }}
+            />
+          </Button>
+        )}
       </div>
     </nav>
   );
