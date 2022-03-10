@@ -16,7 +16,9 @@ const style = {
   width: 400,
   bgcolor: "background.paper",
   boxShadow: 10,
+  borderRadius: 2,
   p: 4,
+  textAlign: "center",
 };
 
 export default function Navbar() {
@@ -71,12 +73,17 @@ export default function Navbar() {
         )}
         <Modal open={open} onClose={handleClose}>
           <Box sx={style}>
-            {user?.email}
-            {user && (
-              <Button style={{ textTransform: "capitalize" }} onClick={logout}>
+            <h4>{user?.email}</h4>
+            <br />
+            <div>
+              <Button
+                className="btn"
+                style={{ textTransform: "capitalize" }}
+                onClick={logout}
+              >
                 Logout
               </Button>
-            )}
+            </div>
           </Box>
         </Modal>
       </div>

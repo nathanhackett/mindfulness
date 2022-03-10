@@ -33,27 +33,53 @@ export default function LandingPage() {
 
   const navigate = useNavigate();
   const [signUpError, setSignUpError] = useState("");
-  const [loginError, setloginError] = useState("");
+  const [loginEmailError, setloginEmailError] = useState("");
+  const [loginPasswordError, setloginPasswordError] = useState("");
   const [user, setUser] = useState({});
 
   const signUp = async () => {
-    try {
-      const user = await createUserWithEmailAndPassword(
-        auth,
-        newEmail,
-        newPassword
-      );
-      //await function will return promise, user information stored in "user"
-      navigate("/introduction");
-      console.log(user);
-    } catch (error) {
-      console.log(error.message);
-      setSignUpError(
-        error.message === "Firebase: Error (auth/invalid-email)."
-          ? "Invalid Email"
-          : "Invalid Password"
-      );
-    }
+    // try {
+    //   const user = await createUserWithEmailAndPassword(
+    //     auth,
+    //     newEmail,
+    //     newPassword
+    //   );
+    //   //await function will return promise, user information stored in "user"
+    //   navigate("/introduction");
+    //   console.log(user);
+    // } catch (error) {
+    //   console.log(error.message);
+    //   setSignUpError(
+    //     error.message === "Firebase: Error (auth/invalid-email)."
+    //       ? "Invalid Email"
+    //       : "Invalid Password"
+    //   );
+    // }
+    createUserWithEmailAndPassword(auth, newEmail, newPassword) //from firebase docs
+      .then((userCredential) => {
+        // Signed in
+        const user = userCredential.user;
+        setDoc(doc(db, "users", user.uid), {
+          name: newName,
+          age: newAge,
+          email: newEmail,
+          password: newPassword,
+        });
+        navigate("/introduction");
+        console.log(user);
+      })
+      .catch((error) => {
+        console.log(error.message);
+        setSignUpError(
+          error.message === "Firebase: Error (auth/invalid-email)."
+            ? "Invalid Email"
+            : "Invalid Password"
+        );
+        setSignUpError(
+          error.message === "Firebase: Error (auth/email-already-in-use)." &&
+            "Email already in use"
+        );
+      });
   };
 
   const login = async () => {
@@ -67,16 +93,18 @@ export default function LandingPage() {
       console.log(user);
     } catch (error) {
       console.log(error.message);
-      setloginError(
-        error.message === "Firebase: Error (auth/invalid-email)."
-          ? "Incorrect Email"
-          : "Incorrect Password"
+      setloginEmailError(
+        error.message === "Firebase: Error (auth/invalid-email)." &&
+          "Invalid Email"
+      );
+      setloginPasswordError(
+        error.message === "Firebase: Error (auth/internal-error)." &&
+          "Incorrect Password"
       );
     }
   };
 
-  {
-    /*
+  /*
   const [users, setUsers] = useState([]); //state to hold users, initialise as empty array
   const userCollection = collection(db, "users"); //variable to reference Firestore collection
 
@@ -120,10 +148,8 @@ export default function LandingPage() {
     //if all fields = !empty, then false
   };
 */
-  }
 
-  {
-    /*
+  /*
   // //---(C)RUD---
   // const createUser = async () => {
   //   await addDoc(userCollection, {
@@ -153,7 +179,6 @@ export default function LandingPage() {
     await deleteDoc(userDoc);
   };
   */
-  }
 
   const ages = [
     {
@@ -254,7 +279,7 @@ export default function LandingPage() {
               label="Password"
               type="password"
               variant="outlined"
-              helperText="Please enter a simple password"
+              helperText="Please enter a password (>6 characters)"
               onChange={(event) => {
                 setNewPassword(event.target.value);
               }}
@@ -274,7 +299,9 @@ export default function LandingPage() {
           >
             <p>Why do we need this information?</p>
           </Tooltip>
-          <div>{signUpError}</div>
+          <div style={{ color: "#FF0000" }}>
+            <b>{signUpError}</b>
+          </div>
           <br />
           <Button
             disabled={false}
@@ -296,6 +323,7 @@ export default function LandingPage() {
               id="outlined-basic"
               label="Email"
               variant="outlined"
+              error={loginEmailError}
               helperText="Please enter your MU mail"
               onChange={(event) => {
                 setLoginEmail(event.target.value);
@@ -310,7 +338,8 @@ export default function LandingPage() {
               label="Password"
               type="password"
               variant="outlined"
-              helperText="Please enter a simple password"
+              error={loginPasswordError}
+              helperText={"Please enter your password"}
               onChange={(event) => {
                 setLoginPassword(event.target.value);
               }}
@@ -318,7 +347,10 @@ export default function LandingPage() {
             />
           </div>
           <br />
-          <div>{loginError}</div>
+          <div style={{ color: "#FF0000" }}>
+            <b>{loginEmailError}</b>
+            <b>{loginPasswordError}</b>
+          </div>
           <br />
           <Button
             disabled={false}
