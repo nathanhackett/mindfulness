@@ -1,13 +1,17 @@
-import React from "react";
-import { Link } from "react-router-dom";
-import { Button } from "@mui/material";
-import { ImageList } from "@mui/material";
-import { ImageListItem } from "@mui/material";
-import { Skeleton } from "@mui/material";
-import { FormControl } from "@mui/material";
-import { TextField } from "@mui/material";
-import { MenuItem } from "@mui/material";
-import { Tooltip } from "@mui/material";
+import React, { useState } from "react";
+import { auth, db } from "../firebase";
+import { doc, updateDoc } from "firebase/firestore";
+import { useNavigate } from "react-router-dom";
+import {
+  Button,
+  ImageList,
+  ImageListItem,
+  FormControl,
+  MenuItem,
+  Tooltip,
+  TextField,
+  Skeleton,
+} from "@mui/material";
 import Timer from "../Components/Timer";
 
 const itemData = [
@@ -60,6 +64,29 @@ const rating = [
 ];
 
 export default function SampleSorting() {
+  const [ans1, setAns1] = useState("");
+  const [ans2, setAns2] = useState("");
+  const [ans3, setAns3] = useState("");
+  const [ans4, setAns4] = useState("");
+  const [ans5, setAns5] = useState("");
+
+  const navigate = useNavigate();
+
+  const handleSubmit = async () => {
+    const user = auth.currentUser;
+    if (user !== null) {
+      const uid = user.uid;
+      updateDoc(doc(db, "users", uid), {
+        sampleSortingTask1: ans1,
+        sampleSortingTask2: ans2,
+        sampleSortingTask3: ans3,
+        sampleSortingTask4: ans4,
+        sampleSortingTask5: ans5,
+      });
+      navigate("/tutorialEnd");
+    }
+  };
+
   return (
     <div className="App">
       <ImageList
@@ -143,7 +170,6 @@ export default function SampleSorting() {
         </p>
       </div>
       <br />
-      @TODO: Fix displaying of placeholder boxes
       <ImageList cols={5} rowHeight={300} gap={20} justifyContent="center">
         {/* <Skeleton variant="rectangular" height={300} width="auto">
           +
@@ -169,7 +195,10 @@ export default function SampleSorting() {
             select
             id="outlined-basic"
             variant="standard"
-            // onChange={handleRatingChange}
+            value={ans1}
+            onChange={(event) => {
+              setAns1(event.target.value);
+            }}
           >
             {rating.map((rate) => (
               <MenuItem key={rate.value} value={rate.value}>
@@ -187,7 +216,10 @@ export default function SampleSorting() {
             select
             id="outlined-basic"
             variant="standard"
-            // onChange={handleRatingChange}
+            value={ans2}
+            onChange={(event) => {
+              setAns2(event.target.value);
+            }}
           >
             {rating.map((rate) => (
               <MenuItem key={rate.value} value={rate.value}>
@@ -205,7 +237,10 @@ export default function SampleSorting() {
             select
             id="outlined-basic"
             variant="standard"
-            // onChange={handleRatingChange}
+            value={ans3}
+            onChange={(event) => {
+              setAns3(event.target.value);
+            }}
           >
             {rating.map((rate) => (
               <MenuItem key={rate.value} value={rate.value}>
@@ -223,7 +258,10 @@ export default function SampleSorting() {
             select
             id="outlined-basic"
             variant="standard"
-            // onChange={handleRatingChange}
+            value={ans4}
+            onChange={(event) => {
+              setAns4(event.target.value);
+            }}
           >
             {rating.map((rate) => (
               <MenuItem key={rate.value} value={rate.value}>
@@ -241,7 +279,10 @@ export default function SampleSorting() {
             select
             id="outlined-basic"
             variant="standard"
-            // onChange={handleRatingChange}
+            value={ans5}
+            onChange={(event) => {
+              setAns5(event.target.value);
+            }}
           >
             {rating.map((rate) => (
               <MenuItem key={rate.value} value={rate.value}>
@@ -253,10 +294,9 @@ export default function SampleSorting() {
       </ImageList>
       <br />
       <Button
-        component={Link}
-        to={{ pathname: "/tutorialEnd" }}
         className="btn"
         style={{ textTransform: "capitalize", color: "grey" }}
+        onClick={handleSubmit}
       >
         Continue
       </Button>

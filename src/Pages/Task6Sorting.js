@@ -1,15 +1,18 @@
-import React from "react";
-import { Link, useNavigate } from "react-router-dom";
+import React, { useState } from "react";
+import { auth, db } from "../firebase";
+import { doc, updateDoc } from "firebase/firestore";
+import { useNavigate } from "react-router-dom";
 import {
   Button,
   ImageList,
   ImageListItem,
   FormControl,
   MenuItem,
+  Tooltip,
+  TextField,
+  Skeleton,
 } from "@mui/material";
-import TextField from "@mui/material/TextField";
 import Timer from "../Components/Timer";
-import { Skeleton } from "@mui/material";
 
 const itemData = [
   {
@@ -61,7 +64,29 @@ const rating = [
 ];
 
 export default function Task6Sorting() {
+  const [ans1, setAns1] = useState("");
+  const [ans2, setAns2] = useState("");
+  const [ans3, setAns3] = useState("");
+  const [ans4, setAns4] = useState("");
+  const [ans5, setAns5] = useState("");
+
   const navigate = useNavigate();
+
+  const handleSubmit = async () => {
+    const user = auth.currentUser;
+    if (user !== null) {
+      const uid = user.uid;
+      updateDoc(doc(db, "users", uid), {
+        sortingTaskField1: ans1,
+        sortingTaskField2: ans2,
+        sortingTaskField3: ans3,
+        sortingTaskField4: ans4,
+        sortingTaskField5: ans5,
+      });
+      navigate("/tutorialEnd");
+    }
+  };
+
   const handleRestart = () => {
     navigate("/tutorialEnd");
   };
@@ -151,7 +176,10 @@ export default function Task6Sorting() {
             select
             id="outlined-basic"
             variant="standard"
-            // onChange={handleRatingChange}
+            value={ans1}
+            onChange={(event) => {
+              setAns1(event.target.value);
+            }}
           >
             {rating.map((rate) => (
               <MenuItem key={rate.value} value={rate.value}>
@@ -169,7 +197,10 @@ export default function Task6Sorting() {
             select
             id="outlined-basic"
             variant="standard"
-            // onChange={handleRatingChange}
+            value={ans2}
+            onChange={(event) => {
+              setAns2(event.target.value);
+            }}
           >
             {rating.map((rate) => (
               <MenuItem key={rate.value} value={rate.value}>
@@ -187,7 +218,10 @@ export default function Task6Sorting() {
             select
             id="outlined-basic"
             variant="standard"
-            // onChange={handleRatingChange}
+            value={ans3}
+            onChange={(event) => {
+              setAns3(event.target.value);
+            }}
           >
             {rating.map((rate) => (
               <MenuItem key={rate.value} value={rate.value}>
@@ -205,7 +239,10 @@ export default function Task6Sorting() {
             select
             id="outlined-basic"
             variant="standard"
-            // onChange={handleRatingChange}
+            value={ans4}
+            onChange={(event) => {
+              setAns4(event.target.value);
+            }}
           >
             {rating.map((rate) => (
               <MenuItem key={rate.value} value={rate.value}>
@@ -223,7 +260,10 @@ export default function Task6Sorting() {
             select
             id="outlined-basic"
             variant="standard"
-            // onChange={handleRatingChange}
+            value={ans5}
+            onChange={(event) => {
+              setAns5(event.target.value);
+            }}
           >
             {rating.map((rate) => (
               <MenuItem key={rate.value} value={rate.value}>
@@ -235,10 +275,9 @@ export default function Task6Sorting() {
       </ImageList>
       <br />
       <Button
-        component={Link}
-        to={{ pathname: "/taskEnd" }}
         className="btn"
         style={{ textTransform: "capitalize", color: "grey" }}
+        onClick={handleSubmit}
       >
         Continue
       </Button>

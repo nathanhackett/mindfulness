@@ -1,12 +1,13 @@
 //backend imports
 import React, { useState } from "react";
+import { auth, db } from "../firebase";
 import { doc, setDoc } from "firebase/firestore";
 import { useNavigate } from "react-router-dom";
-import { auth, db } from "../firebase";
 import {
   createUserWithEmailAndPassword,
   signInWithEmailAndPassword,
 } from "firebase/auth";
+
 //frontend imports
 import "../App.css";
 import { TextField } from "@mui/material";
@@ -64,9 +65,9 @@ export default function LandingPage() {
         loginPassword
       ); //await function will return promise, user information stored in "user"
       navigate("/introduction");
-      console.log(user);
+      // console.log(user);
     } catch (error) {
-      console.log(error.message);
+      // console.log(error.message);
       setloginEmailError(
         error.message === "Firebase: Error (auth/invalid-email)." &&
           "Invalid Email"
