@@ -121,8 +121,6 @@ export default function SampleSorting() {
         </FormControl>
       </ImageList>
       <br />
-      {/* @TODO: Research drag and drop in ReactJS */}
-      {/* @TODO: Pinterest API vs Image list */}
       <div className="imagesContainer">
         <ImageList cols={5} rowHeight={300} gap={20}>
           {itemData.map((item) => (

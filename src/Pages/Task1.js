@@ -1,5 +1,7 @@
-import React from "react";
-import { Link, useNavigate } from "react-router-dom";
+import React, { useState } from "react";
+import { db, auth } from "../firebase";
+import { doc, updateDoc } from "firebase/firestore";
+import { useNavigate } from "react-router-dom";
 import { Button, ImageList, ImageListItem, FormControl } from "@mui/material";
 import TextField from "@mui/material/TextField";
 import Timer from "../Components/Timer";
@@ -12,7 +14,23 @@ const itemData = [
 ];
 
 export default function Task1() {
+  const [ans1, setAns1] = useState("");
+  const [ans2, setAns2] = useState("");
+
   const navigate = useNavigate();
+
+  const handleSubmit = async () => {
+    const user = auth.currentUser;
+    if (user !== null) {
+      const uid = user.uid;
+      updateDoc(doc(db, "users", uid), {
+        task1Field1: ans1,
+        task1Field2: ans2,
+      });
+      navigate("/task2");
+    }
+  };
+
   const handleRestart = () => {
     navigate("/tutorialEnd");
   };
@@ -96,6 +114,10 @@ export default function Task1() {
             id="outlined-basic"
             label="What do you see in the image above?"
             variant="outlined"
+            value={ans1}
+            onChange={(event) => {
+              setAns1(event.target.value);
+            }}
           />
         </div>
 
@@ -105,16 +127,19 @@ export default function Task1() {
             id="outlined-basic"
             label="Does this image mean anything to you?"
             variant="outlined"
+            value={ans2}
+            onChange={(event) => {
+              setAns2(event.target.value);
+            }}
           />
           <br />
           <br />
         </div>
       </form>
       <Button
-        component={Link}
-        to={{ pathname: "/task2" }}
         className="btn"
         style={{ textTransform: "capitalize", color: "grey" }}
+        onClick={handleSubmit}
       >
         Continue
       </Button>

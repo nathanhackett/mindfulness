@@ -25,12 +25,10 @@ export default function SampleTask() {
   const [ans2, setAns2] = useState("");
 
   const navigate = useNavigate();
-
   const handleSubmit = async () => {
     const user = auth.currentUser;
     if (user !== null) {
       const uid = user.uid;
-      // console.log(uid);
       updateDoc(doc(db, "users", uid), {
         sampleTaskField1: ans1,
         sampleTaskField2: ans2,

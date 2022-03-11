@@ -1,6 +1,12 @@
 import React from "react";
 import { Link, useNavigate } from "react-router-dom";
-import { Button, ImageList, ImageListItem, FormControl } from "@mui/material";
+import {
+  Button,
+  ImageList,
+  ImageListItem,
+  FormControl,
+  MenuItem,
+} from "@mui/material";
 import TextField from "@mui/material/TextField";
 import Timer from "../Components/Timer";
 import { Skeleton } from "@mui/material";
@@ -25,6 +31,32 @@ const itemData = [
   {
     img: "https://images.unsplash.com/photo-1533827432537-70133748f5c8",
     title: "Hats",
+  },
+];
+
+const rating = [
+  {
+    default: "",
+  },
+  {
+    value: "1",
+    label: "1",
+  },
+  {
+    value: "2",
+    label: "2",
+  },
+  {
+    value: "3",
+    label: "3",
+  },
+  {
+    value: "4",
+    label: "4",
+  },
+  {
+    value: "5",
+    label: "5",
   },
 ];
 
@@ -98,20 +130,110 @@ export default function Task6Sorting() {
         </ImageList>
       </div>
       <div className="textContainer">
-        <p className="text">
-          Based on the above images, please sort them (Drag & Drop)
-          <b>in order of how easy you found it</b> to identify what is being
-          depicted.
+        <p>
+          Based on the above images, please sort them (Drag & Drop)//Rate 1-5
+          <b> in order of how easy you found it</b> to identify what is being
+          depicted, where <b>1 is easiest</b>, <b>5 is hardest</b>
         </p>
       </div>
-      @TODO: Fix displaying of placeholder boxes
       <ImageList cols={5} rowHeight={300} gap={20} justifyContent="center">
         <Skeleton variant="rectangular" height={300} width="auto" />
         <Skeleton variant="rectangular" height={300} width="auto" />
         <Skeleton variant="rectangular" height={300} width="auto" />
         <Skeleton variant="rectangular" height={300} width="auto" />
         <Skeleton variant="rectangular" height={300} width="auto" />
+        <FormControl
+          variant="standard"
+          style={{ width: "100%", textAlign: "center" }}
+        >
+          <TextField
+            required
+            select
+            id="outlined-basic"
+            variant="standard"
+            // onChange={handleRatingChange}
+          >
+            {rating.map((rate) => (
+              <MenuItem key={rate.value} value={rate.value}>
+                {rate.label}
+              </MenuItem>
+            ))}
+          </TextField>
+        </FormControl>
+        <FormControl
+          variant="standard"
+          style={{ width: "100%", textAlign: "center" }}
+        >
+          <TextField
+            required
+            select
+            id="outlined-basic"
+            variant="standard"
+            // onChange={handleRatingChange}
+          >
+            {rating.map((rate) => (
+              <MenuItem key={rate.value} value={rate.value}>
+                {rate.label}
+              </MenuItem>
+            ))}
+          </TextField>
+        </FormControl>
+        <FormControl
+          variant="standard"
+          style={{ width: "100%", textAlign: "center" }}
+        >
+          <TextField
+            required
+            select
+            id="outlined-basic"
+            variant="standard"
+            // onChange={handleRatingChange}
+          >
+            {rating.map((rate) => (
+              <MenuItem key={rate.value} value={rate.value}>
+                {rate.label}
+              </MenuItem>
+            ))}
+          </TextField>
+        </FormControl>
+        <FormControl
+          variant="standard"
+          style={{ width: "100%", textAlign: "center" }}
+        >
+          <TextField
+            required
+            select
+            id="outlined-basic"
+            variant="standard"
+            // onChange={handleRatingChange}
+          >
+            {rating.map((rate) => (
+              <MenuItem key={rate.value} value={rate.value}>
+                {rate.label}
+              </MenuItem>
+            ))}
+          </TextField>
+        </FormControl>
+        <FormControl
+          variant="standard"
+          style={{ width: "100%", textAlign: "center" }}
+        >
+          <TextField
+            required
+            select
+            id="outlined-basic"
+            variant="standard"
+            // onChange={handleRatingChange}
+          >
+            {rating.map((rate) => (
+              <MenuItem key={rate.value} value={rate.value}>
+                {rate.label}
+              </MenuItem>
+            ))}
+          </TextField>
+        </FormControl>
       </ImageList>
+      <br />
       <Button
         component={Link}
         to={{ pathname: "/taskEnd" }}
