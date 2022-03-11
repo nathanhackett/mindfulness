@@ -1,9 +1,8 @@
 import React from "react";
-import { Link } from "react-router-dom";
-import { Button } from "@mui/material";
+import { Link, useNavigate } from "react-router-dom";
+import { Button, ImageList, ImageListItem, FormControl } from "@mui/material";
 import TextField from "@mui/material/TextField";
-import { ImageList } from "@mui/material";
-import { ImageListItem } from "@mui/material";
+import Timer from "../Components/Timer";
 
 const itemData = [
   {
@@ -13,12 +12,62 @@ const itemData = [
 ];
 
 export default function Task5() {
+  const navigate = useNavigate();
+  const handleRestart = () => {
+    navigate("/tutorialEnd");
+  };
+
   return (
     <div className="App">
-      <Link to={{ pathname: "/tutorialEnd" }}>
-        <h1>Task 5</h1>
-      </Link>
-      @TODO: Timer, Restart button
+      <ImageList
+        cols={3}
+        rowHeight={300}
+        gap={20}
+        justifyContent="center"
+        style={{ backgroundColor: "#e8e8e8" }}
+      >
+        <FormControl
+          variant="standard"
+          style={{
+            width: "100%",
+            textAlign: "center",
+            alignItems: "center",
+          }}
+        >
+          <button
+            className="btn"
+            style={{
+              color: "red",
+              position: "relative",
+              top: "15%",
+              fontWeight: "bold",
+            }}
+            onClick={handleRestart}
+          >
+            Restart
+          </button>
+        </FormControl>
+        <FormControl
+          variant="standard"
+          style={{ width: "100%", textAlign: "center" }}
+        >
+          <h1
+            style={{
+              position: "relative",
+              top: "8%",
+            }}
+          >
+            Image 5
+          </h1>
+        </FormControl>
+        <FormControl
+          variant="standard"
+          style={{ width: "100%", textAlign: "center" }}
+        >
+          <Timer />
+        </FormControl>
+      </ImageList>
+      <br />
       <div
         style={{
           paddingLeft: "30%",

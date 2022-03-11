@@ -1,22 +1,17 @@
-import React, { useState, useEffect } from "react";
-import { db } from "../firebase";
-import {
-  collection,
-  getDocs,
-  addDoc,
-  deleteDoc,
-  userDoc,
-  doc,
-  updateDoc,
-  setDoc,
-  Timestamp,
-} from "firebase/firestore";
-import { Link } from "react-router-dom";
+import React, { useState } from "react";
+import { db, auth } from "../firebase";
+import { doc, updateDoc } from "firebase/firestore";
+import { useNavigate } from "react-router-dom";
 import "../App.css";
 import TextField from "@mui/material/TextField";
-import { ImageList } from "@mui/material";
-import { ImageListItem } from "@mui/material";
-import { Button } from "@mui/material";
+import {
+  Button,
+  ImageList,
+  ImageListItem,
+  FormControl,
+  Tooltip,
+} from "@mui/material";
+import Timer from "../Components/Timer";
 
 const itemData = [
   {
@@ -29,20 +24,81 @@ export default function SampleTask() {
   const [ans1, setAns1] = useState("");
   const [ans2, setAns2] = useState("");
 
+  const navigate = useNavigate();
+
   const handleSubmit = async () => {
-    const docRef = doc(db, "users", "one");
-    const docData = {
-      answer1: ans1,
-      answer2: ans2,
-    };
-    await updateDoc(docRef, docData);
+    const user = auth.currentUser;
+    if (user !== null) {
+      const uid = user.uid;
+      // console.log(uid);
+      updateDoc(doc(db, "users", uid), {
+        sampleTaskField1: ans1,
+        sampleTaskField2: ans2,
+      });
+      navigate("/sampleSort");
+    }
   };
 
   return (
     <div className="App">
-      <h1>Sample Task</h1>
-      <br />
-      @TODO: Pinterest API or hardcode image set @TODO: Help text bubbles
+      <ImageList
+        cols={3}
+        rowHeight={300}
+        gap={20}
+        justifyContent="center"
+        style={{ backgroundColor: "#e8e8e8" }}
+      >
+        <FormControl
+          variant="standard"
+          style={{
+            width: "100%",
+            textAlign: "center",
+            alignItems: "center",
+          }}
+        >
+          <Tooltip
+            placement="top"
+            title="This research is being conducted in accordance with University
+              security and privacy policies.
+              This information is necessary in identifying demographic patterns
+              in the sample response collection.
+              It also provides a means of identifying participants and reaching
+              out to whom it may concern."
+          >
+            <button
+              className="btn"
+              style={{
+                color: "red",
+                position: "relative",
+                top: "15%",
+                fontWeight: "bold",
+              }}
+              disabled={true}
+            >
+              Restart
+            </button>
+          </Tooltip>
+        </FormControl>
+        <FormControl
+          variant="standard"
+          style={{ width: "100%", textAlign: "center" }}
+        >
+          <h1
+            style={{
+              position: "relative",
+              top: "8%",
+            }}
+          >
+            Sorting Task
+          </h1>
+        </FormControl>
+        <FormControl
+          variant="standard"
+          style={{ width: "100%", textAlign: "center" }}
+        >
+          <Timer />
+        </FormControl>
+      </ImageList>
       <br />
       <div
         style={{
@@ -93,20 +149,8 @@ export default function SampleTask() {
           <br />
           <br />
         </div>
-        <div className="helpBubble">
-          <div className="speechBubbleTemplate">
-            This research is being conducted in accordance with University
-            security and privacy policies. <br />
-            This information is necessary in identifying demographic patterns in
-            the sample response collection. <br />
-            It also provides a means of identifying participants and reaching
-            out to whom it may concern.
-          </div>
-        </div>
       </form>
       <Button
-        component={Link}
-        to={{ pathname: "/sampleSort" }}
         className="btn"
         style={{ textTransform: "capitalize", color: "grey" }}
         onClick={handleSubmit}

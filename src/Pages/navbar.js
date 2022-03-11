@@ -1,5 +1,6 @@
 import React, { useState } from "react";
-import { auth } from "../firebase";
+import { auth, db } from "../firebase";
+import { doc, getDoc } from "firebase/firestore";
 import { onAuthStateChanged, signOut } from "firebase/auth";
 import { Link, useNavigate } from "react-router-dom";
 
@@ -7,6 +8,9 @@ import { AccountCircle } from "@material-ui/icons";
 import { Button } from "@mui/material";
 import Box from "@mui/material/Box";
 import Modal from "@mui/material/Modal";
+
+import Timer from "../Components/Timer";
+import { FormControl } from "@mui/material";
 
 const style = {
   position: "absolute",
@@ -41,6 +45,8 @@ export default function Navbar() {
     handleClose();
   };
 
+  //fetch name from firestore
+
   return (
     <nav className="navbar">
       {/* https://getbootstrap.com/docs/5.0/components/navbar/ */}
@@ -54,15 +60,6 @@ export default function Navbar() {
           marginTop: "5px",
         }}
       >
-        {/* {user?.email}
-        {user && (
-          <Button
-            style={{ color: "white", textTransform: "capitalize" }}
-            onClick={logout}
-          >
-            Logout
-          </Button>
-        )} */}
         {window.location.pathname !== "/" && (
           <Button className="btn-modal" onClick={handleOpen}>
             <AccountCircle

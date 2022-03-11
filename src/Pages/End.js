@@ -18,8 +18,18 @@ export default function End() {
   };
   return (
     <div className="App">
-      {user && <button onClick={logout}>Logout</button>}
-      <div>End</div>
+      <br />
+      <h4>Thank you for your participation!</h4>
+      <p>
+        You have reached the end of the survey, please logout using the button
+        below.
+      </p>
+      <br />
+      {user && (
+        <button className="btn" onClick={logout}>
+          Logout
+        </button>
+      )}
     </div>
   );
 }

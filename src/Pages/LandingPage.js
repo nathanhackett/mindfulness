@@ -1,13 +1,6 @@
 //backend imports
-import React, { useState, useEffect } from "react";
-import {
-  collection,
-  getDocs,
-  addDoc,
-  deleteDoc,
-  doc,
-  setDoc,
-} from "firebase/firestore";
+import React, { useState } from "react";
+import { doc, setDoc } from "firebase/firestore";
 import { useNavigate } from "react-router-dom";
 import { auth, db } from "../firebase";
 import {
@@ -22,8 +15,6 @@ import { Button } from "@mui/material";
 import { Tooltip } from "@mui/material";
 
 export default function LandingPage() {
-  const userCollection = collection(db, "users"); //variable to reference Firestore collection
-
   const [newName, setNewName] = useState(""); //state to hold user name, initialise as empty string
   const [newAge, setNewAge] = useState(""); //state to hold user age, initialise as 0
   const [newEmail, setNewEmail] = useState(""); //state to hold user email, initialise as empty string
@@ -35,27 +26,10 @@ export default function LandingPage() {
   const [signUpError, setSignUpError] = useState("");
   const [loginEmailError, setloginEmailError] = useState("");
   const [loginPasswordError, setloginPasswordError] = useState("");
-  const [user, setUser] = useState({});
+  //const [user, setUser] = useState({});
 
   const signUp = async () => {
-    // try {
-    //   const user = await createUserWithEmailAndPassword(
-    //     auth,
-    //     newEmail,
-    //     newPassword
-    //   );
-    //   //await function will return promise, user information stored in "user"
-    //   navigate("/introduction");
-    //   console.log(user);
-    // } catch (error) {
-    //   console.log(error.message);
-    //   setSignUpError(
-    //     error.message === "Firebase: Error (auth/invalid-email)."
-    //       ? "Invalid Email"
-    //       : "Invalid Password"
-    //   );
-    // }
-    createUserWithEmailAndPassword(auth, newEmail, newPassword) //from firebase docs
+    createUserWithEmailAndPassword(auth, newEmail, newPassword) //from firebase docs, function returns promise, user information stored in "user"
       .then((userCredential) => {
         // Signed in
         const user = userCredential.user;
@@ -75,10 +49,10 @@ export default function LandingPage() {
             ? "Invalid Email"
             : "Invalid Password"
         );
-        setSignUpError(
-          error.message === "Firebase: Error (auth/email-already-in-use)." &&
-            "Email already in use"
-        );
+        // setSignUpError(
+        //   error.message === "Firebase: Error (auth/email-already-in-use)." &&
+        //     "Email already in use"
+        // );
       });
   };
 
@@ -103,82 +77,6 @@ export default function LandingPage() {
       );
     }
   };
-
-  /*
-  const [users, setUsers] = useState([]); //state to hold users, initialise as empty array
-  const userCollection = collection(db, "users"); //variable to reference Firestore collection
-
-  const [newName, setNewName] = useState(""); //state to hold user name, initialise as empty string
-  const [newAge, setNewAge] = useState(""); //state to hold user age, initialise as 0
-  const [newEmail, setNewEmail] = useState(""); //state to hold user email, initialise as empty string
-
-  const [errors, setErrors] = useState("");
-
-  const handleNameChange = (event) => {
-    const {
-      target: { value },
-    } = event;
-    setErrors({ newName: "" });
-    setNewName(value);
-
-    let nameReg = new RegExp(/^([^0-9]*)$/).test(value);
-    if (!nameReg) {
-      setErrors({ newName: "Invalid name" });
-    }
-  };
-
-  const handleEmailChange = (event) => {
-    const {
-      target: { value },
-    } = event;
-    setErrors({ newEmail: "" });
-    setNewEmail(value);
-
-    let emailReg = new RegExp(
-      /^(([^<>()\]\\.,;:\s@"]+(\.[^<>()\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/
-    ).test(value);
-    if (!emailReg) {
-      setErrors({ newEmail: "Invalid email format" });
-    }
-  };
-
-  const buttonDisable = () => {
-    //if error.name = false && error.email = false, return false, else return true
-    //or
-    //if all fields = !empty, then false
-  };
-*/
-
-  /*
-  // //---(C)RUD---
-  // const createUser = async () => {
-  //   await addDoc(userCollection, {
-  //     name: newName,
-  //     age: newAge,
-  //     email: newEmail,
-  //   });
-  // };
-
-  //---C(R)UD---
-  useEffect(() => {
-    //triggers every time component is rendered
-    const getUsers = async () => {
-      //async/await function to request from Firebase
-      //returns promise (i.e. the data in the document in its raw form)
-      //cannot make useEffect async, use async inside hook
-      const data = await getDocs(userCollection); //get collection using reference
-      setUsers(data.docs.map((doc) => ({ ...doc.data(), id: doc.id }))); //append fetched information to users array
-      console.log("updated");
-    };
-    getUsers(); //call function to fetch users from Firebase document
-  }, []); //***fix rerendering
-
-  //---CRU(D)---
-  const deleteUser = async (id) => {
-    const userDoc = doc(db, "users", id);
-    await deleteDoc(userDoc);
-  };
-  */
 
   const ages = [
     {
@@ -216,7 +114,6 @@ export default function LandingPage() {
 
   return (
     <div className="App">
-      @TODO: Connect input data to firestore
       <h1>Mindfulness Meaure</h1>
       <br />
       <h4>A Maynooth University Research Initiative</h4>
@@ -287,7 +184,6 @@ export default function LandingPage() {
             />
           </div>
           <br />
-          <p>@TODO: is the text in this speech bubble correct</p>
           <Tooltip
             placement="top"
             title="This research is being conducted in accordance with University
@@ -363,27 +259,6 @@ export default function LandingPage() {
           <br />
         </form>
       </div>
-      {/* ---C(R)UD--- 
-      <div className="App">
-        {users.map((user) => {
-          return (
-            <div>
-              <h3>Name: {user.name}</h3>
-              <h3>Age: {user.age}</h3>
-              <h3>Email: {user.email}</h3>
-              {/* ---CRU(D)--- 
-              <button
-                className="btn"
-                onClick={() => {
-                  deleteUser(user.id);
-                }}
-              >
-                Delete User
-              </button>
-            </div>
-          );
-        })}
-      </div> */}
     </div>
   );
 }
