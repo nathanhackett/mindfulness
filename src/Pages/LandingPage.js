@@ -35,10 +35,10 @@ export default function LandingPage() {
         // Signed in
         const user = userCredential.user;
         setDoc(doc(db, "users", user.uid), {
-          name: newName,
-          age: newAge,
-          email: newEmail,
-          password: newPassword,
+          participantName: newName,
+          participantAge: newAge,
+          participantEmail: newEmail,
+          participantPassword: newPassword,
         });
         navigate("/introduction");
         console.log(user);
@@ -65,9 +65,9 @@ export default function LandingPage() {
         loginPassword
       ); //await function will return promise, user information stored in "user"
       navigate("/introduction");
-      // console.log(user);
+      console.log(user);
     } catch (error) {
-      // console.log(error.message);
+      console.log(error.message);
       setloginEmailError(
         error.message === "Firebase: Error (auth/invalid-email)." &&
           "Invalid Email"
@@ -115,7 +115,7 @@ export default function LandingPage() {
 
   return (
     <div className="App">
-      <h1>Mindfulness Meaure</h1>
+      <h1>Mindfulness Measure</h1>
       <br />
       <h4>A Maynooth University Research Initiative</h4>
       <br />

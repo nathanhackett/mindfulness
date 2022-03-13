@@ -12,6 +12,7 @@ import {
   Tooltip,
 } from "@mui/material";
 import Timer from "../Components/Timer";
+import Unsplash from "../Components/api";
 
 const itemData = [
   {
@@ -21,6 +22,14 @@ const itemData = [
 ];
 
 export default function SampleTask() {
+  // const getImages = (term) => {
+  //   return Unsplash.get("https://api.unsplash.com/search/photos");
+  // };
+
+  // const searchImages = (term) => {
+  //   getImages;
+  // };
+
   const [ans1, setAns1] = useState("");
   const [ans2, setAns2] = useState("");
 
@@ -87,7 +96,7 @@ export default function SampleTask() {
               top: "8%",
             }}
           >
-            Sorting Task
+            Sample Image
           </h1>
         </FormControl>
         <FormControl

@@ -13,6 +13,13 @@ import {
   Skeleton,
 } from "@mui/material";
 import Timer from "../Components/Timer";
+import Table from "@material-ui/core/Table";
+import TableBody from "@material-ui/core/TableBody";
+import TableCell from "@material-ui/core/TableCell";
+import TableContainer from "@material-ui/core/TableContainer";
+import TableHead from "@material-ui/core/TableHead";
+import TableRow from "@material-ui/core/TableRow";
+import Paper from "@material-ui/core/Paper";
 
 const itemData = [
   {
@@ -147,7 +154,16 @@ export default function SampleSorting() {
           <Timer />
         </FormControl>
       </ImageList>
+      <div className="textContainer">
+        <br />
+        <p className="text">
+          Based on the below images, please rate them 1-5
+          <b> in order of how easy you found it</b> to identify what is being
+          depicted, where <b>1 is easiest</b>, <b>5 is hardest.</b>
+        </p>
+      </div>
       <br />
+
       <div className="imagesContainer">
         <ImageList cols={5} rowHeight={300} gap={20}>
           {itemData.map((item) => (
@@ -162,14 +178,7 @@ export default function SampleSorting() {
         </ImageList>
       </div>
       <br />
-      <div className="textContainer">
-        <p className="text">
-          Based on the above images, please sort them (Drag & Drop)//Rate 1-5,
-          <b> in order of how easy you found it</b> to identify what is being
-          depicted, where <b>1 is easiest</b>, <b>5 is hardest</b>
-        </p>
-      </div>
-      <br />
+
       <ImageList cols={5} rowHeight={300} gap={20} justifyContent="center">
         {/* <Skeleton variant="rectangular" height={300} width="auto">
           +
@@ -186,6 +195,7 @@ export default function SampleSorting() {
         <Skeleton variant="rectangular" height={300} width="auto">
           +
         </Skeleton> */}
+
         <FormControl
           variant="standard"
           style={{ width: "100%", textAlign: "center" }}
@@ -292,6 +302,7 @@ export default function SampleSorting() {
           </TextField>
         </FormControl>
       </ImageList>
+
       <br />
       <Button
         className="btn"

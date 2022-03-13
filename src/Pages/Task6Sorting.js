@@ -83,7 +83,7 @@ export default function Task6Sorting() {
         sortingTaskField4: ans4,
         sortingTaskField5: ans5,
       });
-      navigate("/tutorialEnd");
+      navigate("/taskEnd");
     }
   };
 
@@ -141,6 +141,14 @@ export default function Task6Sorting() {
         </FormControl>
       </ImageList>
       <br />
+      <div className="textContainer">
+        <p>
+          Based on the above images, please Rate them 1-5
+          <b> in order of how easy you found it</b> to identify what is being
+          depicted, where <b>1 is easiest</b>, <b>5 is hardest.</b>
+        </p>
+      </div>
+      <br />
       <div className="imagesContainer">
         <ImageList cols={5} rowHeight={300} gap={20}>
           {itemData.map((item) => (
@@ -154,19 +162,13 @@ export default function Task6Sorting() {
           ))}
         </ImageList>
       </div>
-      <div className="textContainer">
-        <p>
-          Based on the above images, please sort them (Drag & Drop)//Rate 1-5
-          <b> in order of how easy you found it</b> to identify what is being
-          depicted, where <b>1 is easiest</b>, <b>5 is hardest</b>
-        </p>
-      </div>
+
       <ImageList cols={5} rowHeight={300} gap={20} justifyContent="center">
+        {/* <Skeleton variant="rectangular" height={300} width="auto" />
         <Skeleton variant="rectangular" height={300} width="auto" />
         <Skeleton variant="rectangular" height={300} width="auto" />
         <Skeleton variant="rectangular" height={300} width="auto" />
-        <Skeleton variant="rectangular" height={300} width="auto" />
-        <Skeleton variant="rectangular" height={300} width="auto" />
+        <Skeleton variant="rectangular" height={300} width="auto" /> */}
         <FormControl
           variant="standard"
           style={{ width: "100%", textAlign: "center" }}
