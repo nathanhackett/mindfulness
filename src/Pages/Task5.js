@@ -16,18 +16,22 @@ const itemData = [
 export default function Task5() {
   const [ans1, setAns1] = useState("");
   const [ans2, setAns2] = useState("");
-
+  const [emptyAns, setEmptyAns] = useState("");
   const navigate = useNavigate();
 
   const handleSubmit = async () => {
     const user = auth.currentUser;
     if (user !== null) {
       const uid = user.uid;
-      updateDoc(doc(db, "users", uid), {
-        task5Field1: ans1,
-        task5Field2: ans2,
-      });
-      navigate("/task6");
+      if ((ans1 !== "") & (ans2 !== "")) {
+        updateDoc(doc(db, "users", uid), {
+          task5Field1: ans1,
+          task5Field2: ans2,
+        });
+        navigate("/task6");
+      } else {
+        setEmptyAns("Please don't leave any fields blank!");
+      }
     }
   };
 
@@ -136,6 +140,10 @@ export default function Task5() {
           <br />
         </div>
       </form>
+      <div style={{ color: "#6e6e6e" }}>
+        <b>{emptyAns}</b>
+      </div>
+      <br />
       <Button
         className="btn"
         style={{ textTransform: "capitalize", color: "grey" }}

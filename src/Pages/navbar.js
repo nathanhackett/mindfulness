@@ -1,6 +1,5 @@
 import React, { useState } from "react";
-import { auth, db } from "../firebase";
-import { doc, getDoc } from "firebase/firestore";
+import { auth } from "../firebase";
 import { onAuthStateChanged, signOut } from "firebase/auth";
 import { Link, useNavigate } from "react-router-dom";
 
@@ -8,9 +7,6 @@ import { AccountCircle } from "@material-ui/icons";
 import { Button } from "@mui/material";
 import Box from "@mui/material/Box";
 import Modal from "@mui/material/Modal";
-
-import Timer from "../Components/Timer";
-import { FormControl } from "@mui/material";
 
 const style = {
   position: "absolute",

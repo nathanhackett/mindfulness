@@ -8,18 +8,9 @@ import {
   ImageListItem,
   FormControl,
   MenuItem,
-  Tooltip,
   TextField,
   Skeleton,
 } from "@mui/material";
-import Timer from "../Components/Timer";
-import Table from "@material-ui/core/Table";
-import TableBody from "@material-ui/core/TableBody";
-import TableCell from "@material-ui/core/TableCell";
-import TableContainer from "@material-ui/core/TableContainer";
-import TableHead from "@material-ui/core/TableHead";
-import TableRow from "@material-ui/core/TableRow";
-import Paper from "@material-ui/core/Paper";
 import Taskbar from "../Components/Taskbar";
 
 const itemData = [
@@ -77,9 +68,8 @@ export default function SampleSorting() {
   const [ans3, setAns3] = useState(0);
   const [ans4, setAns4] = useState(0);
   const [ans5, setAns5] = useState(0);
-
-  const navigate = useNavigate();
   const [sameAns, setSameAns] = useState("");
+  const navigate = useNavigate();
 
   const handleSubmit = async () => {
     const user = auth.currentUser;

@@ -6,6 +6,7 @@ import "../App.css";
 import TextField from "@mui/material/TextField";
 import { Button, ImageList, ImageListItem } from "@mui/material";
 import Taskbar from "../Components/Taskbar";
+import { Tooltip } from "@material-ui/core";
 
 const itemData = [
   {
@@ -17,17 +18,22 @@ const itemData = [
 export default function SampleTask() {
   const [ans1, setAns1] = useState("");
   const [ans2, setAns2] = useState("");
-
+  const [emptyAns, setEmptyAns] = useState("");
   const navigate = useNavigate();
+
   const handleSubmit = async () => {
     const user = auth.currentUser;
     if (user !== null) {
       const uid = user.uid;
-      updateDoc(doc(db, "users", uid), {
-        sampleTaskField1: ans1,
-        sampleTaskField2: ans2,
-      });
-      navigate("/sampleSort");
+      if ((ans1 !== "") & (ans2 !== "")) {
+        updateDoc(doc(db, "users", uid), {
+          sampleTaskField1: ans1,
+          sampleTaskField2: ans2,
+        });
+        navigate("/sampleSort");
+      } else {
+        setEmptyAns("Please don't leave any fields blank!");
+      }
     }
   };
 
@@ -58,16 +64,22 @@ export default function SampleTask() {
       </div>
       <form className="formContainer">
         <div className="responseFields">
-          <TextField
-            className="responseInput"
-            id="outlined-basic"
-            label="What do you see in the image above?"
-            variant="outlined"
-            value={ans1}
-            onChange={(event) => {
-              setAns1(event.target.value);
-            }}
-          />
+          <Tooltip
+            arrow
+            placement="top"
+            title="You will be asked questions either relating to the image or your response to it, answer as honestly as you can!"
+          >
+            <TextField
+              className="responseInput"
+              id="outlined-basic"
+              label="What do you see in the image above?"
+              variant="outlined"
+              value={ans1}
+              onChange={(event) => {
+                setAns1(event.target.value);
+              }}
+            />
+          </Tooltip>
         </div>
 
         <div className="responseFields">
@@ -81,10 +93,15 @@ export default function SampleTask() {
               setAns2(event.target.value);
             }}
           />
+
           <br />
           <br />
         </div>
       </form>
+      <div style={{ color: "#6e6e6e" }}>
+        <b>{emptyAns}</b>
+      </div>
+      <br />
       <Button
         className="btn"
         style={{ textTransform: "capitalize", color: "grey" }}

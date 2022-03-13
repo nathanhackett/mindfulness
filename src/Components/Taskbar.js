@@ -5,6 +5,9 @@ import { useNavigate } from "react-router-dom";
 
 export default function Taskbar() {
   const navigate = useNavigate();
+  const handleRestart = () => {
+    navigate("/introduction");
+  };
   return (
     <ImageList
       cols={3}
@@ -23,6 +26,7 @@ export default function Taskbar() {
       >
         {window.location.pathname === "/sampleTask" && (
           <Tooltip
+            arrow
             placement="bottom"
             title="You may restart a task at any time, your responses won't be affected."
           >
@@ -34,6 +38,7 @@ export default function Taskbar() {
                 top: "15%",
                 fontWeight: "bold",
               }}
+              onClick={handleRestart}
             >
               Restart
             </button>
@@ -52,6 +57,7 @@ export default function Taskbar() {
                 top: "15%",
                 fontWeight: "bold",
               }}
+              onClick={handleRestart}
             >
               Restart
             </button>
