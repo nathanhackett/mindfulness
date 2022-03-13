@@ -1,8 +1,8 @@
 import axios from "axios";
 
 export default axios.create({
-  baseURL: "https://api.unsplash.com/",
+  baseURL: "",
   headers: {
-    Authorization: `${process.env.MY_UNSPLASH_ACCESS_KEY}`,
+    Authorization: `${process.env.MY_PINTEREST_ACCESS_KEY}`,
   },
 });

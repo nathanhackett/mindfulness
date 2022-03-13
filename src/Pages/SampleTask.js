@@ -4,15 +4,8 @@ import { doc, updateDoc } from "firebase/firestore";
 import { useNavigate } from "react-router-dom";
 import "../App.css";
 import TextField from "@mui/material/TextField";
-import {
-  Button,
-  ImageList,
-  ImageListItem,
-  FormControl,
-  Tooltip,
-} from "@mui/material";
-import Timer from "../Components/Timer";
-import Unsplash from "../Components/api";
+import { Button, ImageList, ImageListItem } from "@mui/material";
+import Taskbar from "../Components/Taskbar";
 
 const itemData = [
   {
@@ -22,14 +15,6 @@ const itemData = [
 ];
 
 export default function SampleTask() {
-  // const getImages = (term) => {
-  //   return Unsplash.get("https://api.unsplash.com/search/photos");
-  // };
-
-  // const searchImages = (term) => {
-  //   getImages;
-  // };
-
   const [ans1, setAns1] = useState("");
   const [ans2, setAns2] = useState("");
 
@@ -48,64 +33,7 @@ export default function SampleTask() {
 
   return (
     <div className="App">
-      <ImageList
-        cols={3}
-        rowHeight={300}
-        gap={20}
-        justifyContent="center"
-        style={{ backgroundColor: "#e8e8e8" }}
-      >
-        <FormControl
-          variant="standard"
-          style={{
-            width: "100%",
-            textAlign: "center",
-            alignItems: "center",
-          }}
-        >
-          <Tooltip
-            placement="top"
-            title="This research is being conducted in accordance with University
-              security and privacy policies.
-              This information is necessary in identifying demographic patterns
-              in the sample response collection.
-              It also provides a means of identifying participants and reaching
-              out to whom it may concern."
-          >
-            <button
-              className="btn"
-              style={{
-                color: "red",
-                position: "relative",
-                top: "15%",
-                fontWeight: "bold",
-              }}
-              disabled={true}
-            >
-              Restart
-            </button>
-          </Tooltip>
-        </FormControl>
-        <FormControl
-          variant="standard"
-          style={{ width: "100%", textAlign: "center" }}
-        >
-          <h1
-            style={{
-              position: "relative",
-              top: "8%",
-            }}
-          >
-            Sample Image
-          </h1>
-        </FormControl>
-        <FormControl
-          variant="standard"
-          style={{ width: "100%", textAlign: "center" }}
-        >
-          <Timer />
-        </FormControl>
-      </ImageList>
+      <Taskbar />
       <br />
       <div
         style={{

@@ -20,6 +20,7 @@ import TableContainer from "@material-ui/core/TableContainer";
 import TableHead from "@material-ui/core/TableHead";
 import TableRow from "@material-ui/core/TableRow";
 import Paper from "@material-ui/core/Paper";
+import Taskbar from "../Components/Taskbar";
 
 const itemData = [
   {
@@ -49,111 +50,65 @@ const rating = [
     default: "",
   },
   {
-    value: "1",
+    value: 1,
     label: "1",
   },
   {
-    value: "2",
+    value: 2,
     label: "2",
   },
   {
-    value: "3",
+    value: 3,
     label: "3",
   },
   {
-    value: "4",
+    value: 4,
     label: "4",
   },
   {
-    value: "5",
+    value: 5,
     label: "5",
   },
 ];
 
 export default function SampleSorting() {
-  const [ans1, setAns1] = useState("");
-  const [ans2, setAns2] = useState("");
-  const [ans3, setAns3] = useState("");
-  const [ans4, setAns4] = useState("");
-  const [ans5, setAns5] = useState("");
+  const [ans1, setAns1] = useState(0);
+  const [ans2, setAns2] = useState(0);
+  const [ans3, setAns3] = useState(0);
+  const [ans4, setAns4] = useState(0);
+  const [ans5, setAns5] = useState(0);
 
   const navigate = useNavigate();
+  const [sameAns, setSameAns] = useState("");
 
   const handleSubmit = async () => {
     const user = auth.currentUser;
     if (user !== null) {
       const uid = user.uid;
-      updateDoc(doc(db, "users", uid), {
-        sampleSortingTask1: ans1,
-        sampleSortingTask2: ans2,
-        sampleSortingTask3: ans3,
-        sampleSortingTask4: ans4,
-        sampleSortingTask5: ans5,
-      });
-      navigate("/tutorialEnd");
+      if (
+        (ans1 !== ans2 || ans3 || ans4 || ans5) &
+        (ans2 !== ans1 || ans3 || ans4 || ans5) &
+        (ans3 !== ans1 || ans2 || ans4 || ans5) &
+        (ans4 !== ans1 || ans2 || ans3 || ans5) &
+        (ans5 !== ans1 || ans2 || ans3 || ans4)
+      ) {
+        updateDoc(doc(db, "users", uid), {
+          sampleSortingTask1: ans1,
+          sampleSortingTask2: ans2,
+          sampleSortingTask3: ans3,
+          sampleSortingTask4: ans4,
+          sampleSortingTask5: ans5,
+        });
+        navigate("/tutorialEnd");
+      } else {
+        setSameAns("Can't have two of the same values.");
+      }
     }
   };
 
   return (
     <div className="App">
-      <ImageList
-        cols={3}
-        rowHeight={300}
-        gap={20}
-        justifyContent="center"
-        style={{ backgroundColor: "#e8e8e8" }}
-      >
-        <FormControl
-          variant="standard"
-          style={{
-            width: "100%",
-            textAlign: "center",
-            alignItems: "center",
-          }}
-        >
-          <Tooltip
-            placement="top"
-            title="This research is being conducted in accordance with University
-              security and privacy policies.
-              This information is necessary in identifying demographic patterns
-              in the sample response collection.
-              It also provides a means of identifying participants and reaching
-              out to whom it may concern."
-          >
-            <button
-              className="btn"
-              style={{
-                color: "red",
-                position: "relative",
-                top: "15%",
-                fontWeight: "bold",
-              }}
-              disabled={true}
-            >
-              Restart
-            </button>
-          </Tooltip>
-        </FormControl>
-        <FormControl
-          variant="standard"
-          style={{ width: "100%", textAlign: "center" }}
-        >
-          <h1
-            style={{
-              position: "relative",
-              top: "8%",
-            }}
-          >
-            Sorting Task
-          </h1>
-        </FormControl>
-        <FormControl
-          variant="standard"
-          style={{ width: "100%", textAlign: "center" }}
-        >
-          <Timer />
-        </FormControl>
-      </ImageList>
+      <Taskbar />
       <div className="textContainer">
         <br />
         <p className="text">
@@ -163,7 +118,6 @@ export default function SampleSorting() {
         </p>
       </div>
       <br />
-
       <div className="imagesContainer">
         <ImageList cols={5} rowHeight={300} gap={20}>
           {itemData.map((item) => (
@@ -302,7 +256,10 @@ export default function SampleSorting() {
           </TextField>
         </FormControl>
       </ImageList>
-
+      <br />
+      <div style={{ color: "#FF0000" }}>
+        <b>{sameAns}</b>
+      </div>
       <br />
       <Button
         className="btn"

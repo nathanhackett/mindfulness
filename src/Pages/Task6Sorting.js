@@ -8,7 +8,6 @@ import {
   ImageListItem,
   FormControl,
   MenuItem,
-  Tooltip,
   TextField,
   Skeleton,
 } from "@mui/material";
@@ -42,48 +41,59 @@ const rating = [
     default: "",
   },
   {
-    value: "1",
+    value: 1,
     label: "1",
   },
   {
-    value: "2",
+    value: 2,
     label: "2",
   },
   {
-    value: "3",
+    value: 3,
     label: "3",
   },
   {
-    value: "4",
+    value: 4,
     label: "4",
   },
   {
-    value: "5",
+    value: 5,
     label: "5",
   },
 ];
 
 export default function Task6Sorting() {
-  const [ans1, setAns1] = useState("");
-  const [ans2, setAns2] = useState("");
-  const [ans3, setAns3] = useState("");
-  const [ans4, setAns4] = useState("");
-  const [ans5, setAns5] = useState("");
+  const [ans1, setAns1] = useState(0);
+  const [ans2, setAns2] = useState(0);
+  const [ans3, setAns3] = useState(0);
+  const [ans4, setAns4] = useState(0);
+  const [ans5, setAns5] = useState(0);
 
   const navigate = useNavigate();
+  const [sameAns, setSameAns] = useState("");
 
   const handleSubmit = async () => {
     const user = auth.currentUser;
     if (user !== null) {
       const uid = user.uid;
-      updateDoc(doc(db, "users", uid), {
-        sortingTaskField1: ans1,
-        sortingTaskField2: ans2,
-        sortingTaskField3: ans3,
-        sortingTaskField4: ans4,
-        sortingTaskField5: ans5,
-      });
-      navigate("/taskEnd");
+      if (
+        (ans1 !== ans2 || ans3 || ans4 || ans5) &
+        (ans2 !== ans1 || ans3 || ans4 || ans5) &
+        (ans3 !== ans1 || ans2 || ans4 || ans5) &
+        (ans4 !== ans1 || ans2 || ans3 || ans5) &
+        (ans5 !== ans1 || ans2 || ans3 || ans4)
+      ) {
+        updateDoc(doc(db, "users", uid), {
+          sortingTaskField1: ans1,
+          sortingTaskField2: ans2,
+          sortingTaskField3: ans3,
+          sortingTaskField4: ans4,
+          sortingTaskField5: ans5,
+        });
+        navigate("/taskEnd");
+      } else {
+        setSameAns("Can't have two of the same values.");
+      }
     }
   };
 
@@ -275,6 +285,10 @@ export default function Task6Sorting() {
           </TextField>
         </FormControl>
       </ImageList>
+      <br />
+      <div style={{ color: "#FF0000" }}>
+        <b>{sameAns}</b>
+      </div>
       <br />
       <Button
         className="btn"
