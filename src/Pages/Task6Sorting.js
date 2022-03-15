@@ -12,6 +12,7 @@ import {
   Skeleton,
 } from "@mui/material";
 import Timer from "../Components/Timer";
+import { Rating } from "../Components/Rating";
 
 const itemData = [
   {
@@ -33,32 +34,6 @@ const itemData = [
   {
     img: "https://images.unsplash.com/photo-1533827432537-70133748f5c8",
     title: "Hats",
-  },
-];
-
-const rating = [
-  {
-    default: "",
-  },
-  {
-    value: 1,
-    label: "1",
-  },
-  {
-    value: 2,
-    label: "2",
-  },
-  {
-    value: 3,
-    label: "3",
-  },
-  {
-    value: 4,
-    label: "4",
-  },
-  {
-    value: 5,
-    label: "5",
   },
 ];
 
@@ -193,7 +168,7 @@ export default function Task6Sorting() {
               setAns1(event.target.value);
             }}
           >
-            {rating.map((rate) => (
+            {Rating.map((rate) => (
               <MenuItem key={rate.value} value={rate.value}>
                 {rate.label}
               </MenuItem>
@@ -214,7 +189,7 @@ export default function Task6Sorting() {
               setAns2(event.target.value);
             }}
           >
-            {rating.map((rate) => (
+            {Rating.map((rate) => (
               <MenuItem key={rate.value} value={rate.value}>
                 {rate.label}
               </MenuItem>
@@ -235,7 +210,7 @@ export default function Task6Sorting() {
               setAns3(event.target.value);
             }}
           >
-            {rating.map((rate) => (
+            {Rating.map((rate) => (
               <MenuItem key={rate.value} value={rate.value}>
                 {rate.label}
               </MenuItem>
@@ -256,7 +231,7 @@ export default function Task6Sorting() {
               setAns4(event.target.value);
             }}
           >
-            {rating.map((rate) => (
+            {Rating.map((rate) => (
               <MenuItem key={rate.value} value={rate.value}>
                 {rate.label}
               </MenuItem>
@@ -277,7 +252,7 @@ export default function Task6Sorting() {
               setAns5(event.target.value);
             }}
           >
-            {rating.map((rate) => (
+            {Rating.map((rate) => (
               <MenuItem key={rate.value} value={rate.value}>
                 {rate.label}
               </MenuItem>

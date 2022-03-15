@@ -2,14 +2,28 @@ import React, { useState } from "react";
 import { db, auth } from "../firebase";
 import { doc, updateDoc } from "firebase/firestore";
 import { useNavigate } from "react-router-dom";
-import { Button, ImageList, ImageListItem, FormControl } from "@mui/material";
+import {
+  Button,
+  ImageList,
+  ImageListItem,
+  FormControl,
+  MenuItem,
+} from "@mui/material";
 import TextField from "@mui/material/TextField";
 import Timer from "../Components/Timer";
+import { Images } from "../Components/Images";
 
-const itemData = [
+const options = [
   {
-    img: "https://images.unsplash.com/photo-1551963831-b3b1ca40c98e",
-    title: "Breakfast",
+    default: "",
+  },
+  {
+    value: "What image depicts",
+    label: "What the image depicts",
+  },
+  {
+    value: "How image depicted",
+    label: "How the image is depicted",
   },
 ];
 
@@ -99,14 +113,16 @@ export default function Task3() {
         }}
       >
         <ImageList cols={1}>
-          {itemData.map((item) => (
-            <ImageListItem key={item.img}>
-              <img
-                src={`${item.img}?fit=crop&auto=format`}
-                srcSet={`${item.img}?fit=crop&auto=format&dpr=2 2x`}
-                alt={item.title}
-                loading="lazy"
-              />
+          {Images.map((image) => (
+            <ImageListItem key={image.img}>
+              {image.title === "Image 3" && (
+                <img
+                  src={`${image.img}?fit=crop&auto=format`}
+                  srcSet={`${image.img}?fit=crop&auto=format&dpr=2 2x`}
+                  alt={image.title}
+                  loading="lazy"
+                />
+              )}
             </ImageListItem>
           ))}
         </ImageList>
@@ -114,15 +130,22 @@ export default function Task3() {
       <form className="formContainer">
         <div className="responseFields">
           <TextField
+            select
             className="responseInput"
             id="outlined-basic"
-            label="What do you see in the image above?"
+            label="What did you notice first?"
             variant="outlined"
             value={ans1}
             onChange={(event) => {
               setAns1(event.target.value);
             }}
-          />
+          >
+            {options.map((option) => (
+              <MenuItem key={option.value} value={option.value}>
+                {option.label}
+              </MenuItem>
+            ))}
+          </TextField>
         </div>
 
         <div className="responseFields">

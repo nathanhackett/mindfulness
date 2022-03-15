@@ -12,55 +12,7 @@ import {
   Skeleton,
 } from "@mui/material";
 import Taskbar from "../Components/Taskbar";
-
-const itemData = [
-  {
-    img: "https://images.unsplash.com/photo-1551963831-b3b1ca40c98e",
-    title: "Breakfast",
-  },
-  {
-    img: "https://images.unsplash.com/photo-1551782450-a2132b4ba21d",
-    title: "Burger",
-  },
-  {
-    img: "https://images.unsplash.com/photo-1522770179533-24471fcdba45",
-    title: "Camera",
-  },
-  {
-    img: "https://images.unsplash.com/photo-1444418776041-9c7e33cc5a9c",
-    title: "Coffee",
-  },
-  {
-    img: "https://images.unsplash.com/photo-1533827432537-70133748f5c8",
-    title: "Hats",
-  },
-];
-
-const rating = [
-  {
-    default: "",
-  },
-  {
-    value: 1,
-    label: "1",
-  },
-  {
-    value: 2,
-    label: "2",
-  },
-  {
-    value: 3,
-    label: "3",
-  },
-  {
-    value: 4,
-    label: "4",
-  },
-  {
-    value: 5,
-    label: "5",
-  },
-];
+import { Rating } from "../Components/Rating";
 
 export default function SampleSorting() {
   const [ans1, setAns1] = useState(0);
@@ -90,6 +42,8 @@ export default function SampleSorting() {
           sampleSortingTask5: ans5,
         });
         navigate("/tutorialEnd");
+      } else if (ans1 || ans2 || ans3 || ans4 || ans5 === null) {
+        setSameAns("Please provide a value for all fields.");
       } else {
         setSameAns("Can't have two of the same values.");
       }
@@ -108,37 +62,49 @@ export default function SampleSorting() {
         </p>
       </div>
       <br />
-      <div className="imagesContainer">
-        <ImageList cols={5} rowHeight={300} gap={20}>
-          {itemData.map((item) => (
-            <ImageListItem key={item.img}>
-              <img
-                src={`${item.img}?fit=crop&auto=format`}
-                alt={item.title}
-                loading="lazy"
-              />
-            </ImageListItem>
-          ))}
-        </ImageList>
-      </div>
       <br />
 
       <ImageList cols={5} rowHeight={300} gap={20} justifyContent="center">
-        {/* <Skeleton variant="rectangular" height={300} width="auto">
-          +
+        <Skeleton
+          variant="rectangular"
+          height={300}
+          width="auto"
+          style={{ borderRadius: "10px" }}
+        >
+          Image 1
         </Skeleton>
-        <Skeleton variant="rectangular" height={300} width="auto">
-          +
+        <Skeleton
+          variant="rectangular"
+          height={300}
+          width="auto"
+          style={{ borderRadius: "10px" }}
+        >
+          Image 2
         </Skeleton>
-        <Skeleton variant="rectangular" height={300} width="auto">
-          +
+        <Skeleton
+          variant="rectangular"
+          height={300}
+          width="auto"
+          style={{ borderRadius: "10px" }}
+        >
+          Image 3
         </Skeleton>
-        <Skeleton variant="rectangular" height={300} width="auto">
-          +
+        <Skeleton
+          variant="rectangular"
+          height={300}
+          width="auto"
+          style={{ borderRadius: "10px" }}
+        >
+          Image 4
         </Skeleton>
-        <Skeleton variant="rectangular" height={300} width="auto">
-          +
-        </Skeleton> */}
+        <Skeleton
+          variant="rectangular"
+          height={300}
+          width="auto"
+          style={{ borderRadius: "10px" }}
+        >
+          Image 5
+        </Skeleton>
 
         <FormControl
           variant="standard"
@@ -154,7 +120,7 @@ export default function SampleSorting() {
               setAns1(event.target.value);
             }}
           >
-            {rating.map((rate) => (
+            {Rating.map((rate) => (
               <MenuItem key={rate.value} value={rate.value}>
                 {rate.label}
               </MenuItem>
@@ -175,7 +141,7 @@ export default function SampleSorting() {
               setAns2(event.target.value);
             }}
           >
-            {rating.map((rate) => (
+            {Rating.map((rate) => (
               <MenuItem key={rate.value} value={rate.value}>
                 {rate.label}
               </MenuItem>
@@ -196,7 +162,7 @@ export default function SampleSorting() {
               setAns3(event.target.value);
             }}
           >
-            {rating.map((rate) => (
+            {Rating.map((rate) => (
               <MenuItem key={rate.value} value={rate.value}>
                 {rate.label}
               </MenuItem>
@@ -217,7 +183,7 @@ export default function SampleSorting() {
               setAns4(event.target.value);
             }}
           >
-            {rating.map((rate) => (
+            {Rating.map((rate) => (
               <MenuItem key={rate.value} value={rate.value}>
                 {rate.label}
               </MenuItem>
@@ -238,7 +204,7 @@ export default function SampleSorting() {
               setAns5(event.target.value);
             }}
           >
-            {rating.map((rate) => (
+            {Rating.map((rate) => (
               <MenuItem key={rate.value} value={rate.value}>
                 {rate.label}
               </MenuItem>

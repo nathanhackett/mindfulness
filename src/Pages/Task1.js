@@ -5,13 +5,7 @@ import { useNavigate } from "react-router-dom";
 import { Button, ImageList, ImageListItem, FormControl } from "@mui/material";
 import TextField from "@mui/material/TextField";
 import Timer from "../Components/Timer";
-
-const itemData = [
-  {
-    img: "https://images.unsplash.com/photo-1551963831-b3b1ca40c98e",
-    title: "Breakfast",
-  },
-];
+import { Images } from "../Components/Images";
 
 export default function Task1() {
   const [ans1, setAns1] = useState("");
@@ -99,14 +93,16 @@ export default function Task1() {
         }}
       >
         <ImageList cols={1}>
-          {itemData.map((item) => (
-            <ImageListItem key={item.img}>
-              <img
-                src={`${item.img}?fit=crop&auto=format`}
-                srcSet={`${item.img}?fit=crop&auto=format&dpr=2 2x`}
-                alt={item.title}
-                loading="lazy"
-              />
+          {Images.map((image) => (
+            <ImageListItem key={image.img}>
+              {image.title === "Image 1" && (
+                <img
+                  src={`${image.img}?fit=crop&auto=format`}
+                  srcSet={`${image.img}?fit=crop&auto=format&dpr=2 2x`}
+                  alt={image.title}
+                  loading="lazy"
+                />
+              )}
             </ImageListItem>
           ))}
         </ImageList>
