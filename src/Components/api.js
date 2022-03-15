@@ -1,8 +1,9 @@
 import axios from "axios";
 
 export default axios.create({
-  baseURL: "",
+  Authorization: "https://www.pinterest.com/oauth/",
+  Token: "https://api.pinterest.com/v5/oauth/token",
   headers: {
-    Authorization: `${process.env.MY_PINTEREST_ACCESS_KEY}`,
+    Authorization: `${process.env.PINTEREST_APP_SECRET}`,
   },
 });

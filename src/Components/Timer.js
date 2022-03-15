@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react";
+import AccessAlarmsIcon from "@mui/icons-material/AccessAlarms";
 
 const Timer = () => {
   const [time, setTime] = useState(0);
@@ -28,13 +29,23 @@ const Timer = () => {
   }, [timerOn]);
 
   return (
-    <div className="Timers">
+    <div>
       <h2
         style={{
           fontFamily: "sans-serif",
           paddingTop: "10px",
         }}
       >
+        <div
+          style={{
+            float: "left",
+            marginRight: "20px",
+            position: "relative",
+            top: "-3px",
+          }}
+        >
+          <AccessAlarmsIcon fontSize="large" />
+        </div>
         <span>{("0" + Math.floor((time / 60000) % 60)).slice(-2)}:</span>
         <span>{("0" + Math.floor((time / 1000) % 60)).slice(-2)}:</span>
         <span>{("0" + ((time / 10) % 100)).slice(-2)}</span>

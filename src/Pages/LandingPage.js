@@ -50,10 +50,6 @@ export default function LandingPage() {
             ? "Invalid Email"
             : "Invalid Password"
         );
-        // setSignUpError(
-        //   error.message === "Firebase: Error (auth/email-already-in-use)." &&
-        //     "Email already in use"
-        // );
       });
   };
 
@@ -69,12 +65,14 @@ export default function LandingPage() {
     } catch (error) {
       console.log(error.message);
       setloginEmailError(
-        error.message === "Firebase: Error (auth/invalid-email)." &&
-          "Invalid Email"
+        error.message === "Firebase: Error (auth/invalid-email)." ||
+          (error.message === "Firebase: Error (auth/user-not-found)." &&
+            "Invalid Email")
       );
       setloginPasswordError(
-        error.message === "Firebase: Error (auth/internal-error)." &&
-          "Incorrect Password"
+        error.message === "Firebase: Error (auth/internal-error)." ||
+          (error.message === "Firebase: Error (auth/wrong-password)." &&
+            "Incorrect Password")
       );
     }
   };
@@ -221,7 +219,9 @@ export default function LandingPage() {
               label="Email"
               variant="outlined"
               error={loginEmailError}
-              helperText="Please enter your MU mail"
+              helperText={
+                loginEmailError ? "Invalid Email" : "Please enter your MU mail"
+              }
               onChange={(event) => {
                 setLoginEmail(event.target.value);
               }}
@@ -236,17 +236,16 @@ export default function LandingPage() {
               type="password"
               variant="outlined"
               error={loginPasswordError}
-              helperText={"Please enter your password"}
+              helperText={
+                loginPasswordError
+                  ? "Incorrect Password"
+                  : "Please enter your password"
+              }
               onChange={(event) => {
                 setLoginPassword(event.target.value);
               }}
               required
             />
-          </div>
-          <br />
-          <div style={{ color: "#FF0000" }}>
-            <b>{loginEmailError}</b>
-            <b>{loginPasswordError}</b>
           </div>
           <br />
           <Button
