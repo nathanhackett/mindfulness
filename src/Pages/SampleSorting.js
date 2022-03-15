@@ -57,7 +57,7 @@ export default function SampleSorting() {
         <br />
         <p className="text">
           Based on the below images, please rate them 1-5
-          <b> in order of how easy you found it</b> to identify what is being
+          <b> in order of how easy you find it</b> to identify what is being
           depicted, where <b>1 is easiest</b>, <b>5 is hardest.</b>
         </p>
       </div>

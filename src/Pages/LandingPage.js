@@ -175,7 +175,7 @@ export default function LandingPage() {
               label="Password"
               type="password"
               variant="outlined"
-              helperText="Please enter a password (>6 characters)"
+              helperText="Please enter a generic password (>6 characters) (not one of your actual passwords)"
               onChange={(event) => {
                 setNewPassword(event.target.value);
               }}

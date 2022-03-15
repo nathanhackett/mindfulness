@@ -125,7 +125,7 @@ export default function Task5() {
           <TextField
             className="responseInput"
             id="outlined-basic"
-            label="Does this image mean anything to you?"
+            label="What do you think the meaning of the image is?"
             variant="outlined"
             value={ans2}
             onChange={(event) => {

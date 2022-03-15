@@ -10,10 +10,6 @@ import React from "react";
 
 export const Images = [
   {
-    img: "https://i.ibb.co/mqz0wf7/Image-1.jpg",
-    title: "Sample Image",
-  },
-  {
     img: "https://i.ibb.co/tZmWBkt/Image-2.jpg",
     title: "Image 1",
   },
@@ -32,5 +28,9 @@ export const Images = [
   {
     img: "https://i.ibb.co/Z24VYYm/Image-5.jpg",
     title: "Image 5",
+  },
+  {
+    img: "https://i.ibb.co/mqz0wf7/Image-1.jpg",
+    title: "Sample Image",
   },
 ];

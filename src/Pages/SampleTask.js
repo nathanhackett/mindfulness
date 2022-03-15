@@ -35,6 +35,12 @@ export default function SampleTask() {
     <div className="App">
       <Taskbar />
       <br />
+      <h4 style={{ backgroundColor: "yellow" }}>
+        Hover over different elements on the screen!
+        <p>Please read each of the tooltips carefully.</p>
+      </h4>
+
+      <br />
       <div
         style={{
           paddingLeft: "30%",
@@ -43,20 +49,26 @@ export default function SampleTask() {
           width: "fit-content",
         }}
       >
-        <ImageList cols={1}>
-          {Images.map((image) => (
-            <ImageListItem key={image.img}>
-              {image.title === "Sample Image" && (
-                <img
-                  src={`${image.img}?fit=crop&auto=format`}
-                  srcSet={`${image.img}?fit=crop&auto=format&dpr=2 2x`}
-                  alt={image.title}
-                  loading="lazy"
-                />
-              )}
-            </ImageListItem>
-          ))}
-        </ImageList>
+        <Tooltip
+          arrow
+          placement="right"
+          title="You will be presented with images containing visaul ambiguity, no more can be said about them!"
+        >
+          <ImageList cols={1}>
+            {Images.map((image) => (
+              <ImageListItem key={image.img}>
+                {image.title === "Sample Image" && (
+                  <img
+                    src={`${image.img}?fit=crop&auto=format`}
+                    srcSet={`${image.img}?fit=crop&auto=format&dpr=2 2x`}
+                    alt={image.title}
+                    loading="lazy"
+                  />
+                )}
+              </ImageListItem>
+            ))}
+          </ImageList>
+        </Tooltip>
       </div>
       <form className="formContainer">
         <div className="responseFields">

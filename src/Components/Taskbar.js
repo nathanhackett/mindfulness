@@ -51,7 +51,6 @@ export default function Taskbar() {
             <button
               className="btn"
               style={{
-                color: "red",
                 position: "relative",
                 top: "15%",
                 fontWeight: "bold",
@@ -81,13 +80,7 @@ export default function Taskbar() {
         variant="standard"
         style={{ width: "100%", textAlign: "center", alignItems: "center" }}
       >
-        <Tooltip
-          arrow
-          placement="bottom"
-          title="You may restart a task at any time, your responses won't be affected."
-        >
-          <Timer />
-        </Tooltip>
+        <Timer />
       </FormControl>
     </ImageList>
   );

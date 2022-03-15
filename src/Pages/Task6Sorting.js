@@ -9,33 +9,9 @@ import {
   FormControl,
   MenuItem,
   TextField,
-  Skeleton,
 } from "@mui/material";
 import Timer from "../Components/Timer";
 import { Rating } from "../Components/Rating";
-
-const itemData = [
-  {
-    img: "https://images.unsplash.com/photo-1551963831-b3b1ca40c98e",
-    title: "Breakfast",
-  },
-  {
-    img: "https://images.unsplash.com/photo-1551782450-a2132b4ba21d",
-    title: "Burger",
-  },
-  {
-    img: "https://images.unsplash.com/photo-1522770179533-24471fcdba45",
-    title: "Camera",
-  },
-  {
-    img: "https://images.unsplash.com/photo-1444418776041-9c7e33cc5a9c",
-    title: "Coffee",
-  },
-  {
-    img: "https://images.unsplash.com/photo-1533827432537-70133748f5c8",
-    title: "Hats",
-  },
-];
 
 export default function Task6Sorting() {
   const [ans1, setAns1] = useState(0);
@@ -66,6 +42,8 @@ export default function Task6Sorting() {
           sortingTaskField5: ans5,
         });
         navigate("/taskEnd");
+      } else if (ans1 || ans2 || ans3 || ans4 || ans5 === "") {
+        setSameAns("Please provide a value for all fields.");
       } else {
         setSameAns("Can't have two of the same values.");
       }
@@ -128,32 +106,59 @@ export default function Task6Sorting() {
       <br />
       <div className="textContainer">
         <p>
-          Based on the above images, please Rate them 1-5
-          <b> in order of how easy you found it</b> to identify what is being
-          depicted, where <b>1 is easiest</b>, <b>5 is hardest.</b>
+          Based on the below images, please Rate them 1-5
+          <b> in order of how easy you find it</b> to determine what the picture
+          is depicting (or attempting to depict), where <b>1 is easiest</b>,{" "}
+          <b>5 is hardest.</b>
         </p>
       </div>
       <br />
       <div className="imagesContainer">
-        <ImageList cols={5} rowHeight={300} gap={20}>
-          {itemData.map((item) => (
-            <ImageListItem key={item.img}>
-              <img
-                src={`${item.img}?fit=crop&auto=format`}
-                alt={item.title}
-                loading="lazy"
-              />
-            </ImageListItem>
-          ))}
+        <ImageList cols={5} rowHeight={400} gap={20}>
+          <ImageListItem>
+            <p style={{ padding: "10px" }}>Image 1</p>
+            <img
+              src="https://i.ibb.co/tZmWBkt/Image-1.jpg"
+              alt="Image 1"
+              border="0"
+            />
+          </ImageListItem>
+          <ImageListItem>
+            <p style={{ padding: "10px" }}>Image 2</p>
+            <img
+              src="https://i.ibb.co/LzLLVPy/Image-2.jpg"
+              alt="Image 2"
+              border="0"
+            />
+          </ImageListItem>
+          <ImageListItem>
+            <p style={{ padding: "10px" }}>Image 3</p>
+            <img
+              src="https://i.ibb.co/hdC6b3h/Image-3.jpg"
+              alt="Image 3"
+              border="0"
+            />
+          </ImageListItem>
+          <ImageListItem>
+            <p style={{ padding: "10px" }}>Image 4</p>
+            <img
+              src="https://i.ibb.co/swbsZwV/Image-4.jpg"
+              alt="Image 4"
+              border="0"
+            />
+          </ImageListItem>
+          <ImageListItem>
+            <p style={{ padding: "10px" }}>Image 5</p>
+            <img
+              src="https://i.ibb.co/Z24VYYm/Image-5.jpg"
+              alt="Image 5"
+              border="0"
+            />
+          </ImageListItem>
         </ImageList>
       </div>
 
       <ImageList cols={5} rowHeight={300} gap={20} justifyContent="center">
-        {/* <Skeleton variant="rectangular" height={300} width="auto" />
-        <Skeleton variant="rectangular" height={300} width="auto" />
-        <Skeleton variant="rectangular" height={300} width="auto" />
-        <Skeleton variant="rectangular" height={300} width="auto" />
-        <Skeleton variant="rectangular" height={300} width="auto" /> */}
         <FormControl
           variant="standard"
           style={{ width: "100%", textAlign: "center" }}

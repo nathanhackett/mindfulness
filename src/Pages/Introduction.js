@@ -18,12 +18,12 @@ export default function Introduction() {
             experience feelings such as missing time.
             <br />
             <br />
-            This application will require you, the participant, to undertake a
-            specific task. The task is designed in such a way to evoke a sense
-            of self-awareness of your responses, a crucial aspect of this
-            research project. <br /> Upon completion of the task you will be
-            asked to complete a short survey based on the "Toronto Mindfulness
-            Scale" with regard to the task you have just completed.
+            This application will require you, the participant, to undertake 6
+            specific tasks. The tasks are designed in such a way to evoke a
+            concentrative state and sense of self-awareness, a crucial aspect of
+            this research project. <br /> Upon completion of the tasks you will
+            be asked to complete a short survey based on the "Toronto
+            Mindfulness Scale" with regard to the tasks you have just completed.
             <br />
             <br />
             Before commencing, we will present a{" "}
