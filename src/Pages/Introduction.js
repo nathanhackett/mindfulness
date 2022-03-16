@@ -24,11 +24,12 @@ export default function Introduction() {
             concentrative state and sense of self-awareness, a crucial aspect of
             this research project. <br /> Upon completion of the tasks you will
             be asked to complete a short survey based on the "Toronto
-            Mindfulness Scale" with regard to the tasks you have just completed.
+            Mindfulness Scale" (TMS) with regard to the tasks you have just
+            completed.
             <br />
             <br />
-            In total, the tasks should take approximately X minutes to complete,
-            but please answer as best as you can at your own pace!
+            In total, the tasks and TMS should take approximately 10-15 minutes
+            to complete, but please answer as best as you can at your own pace!
             <br />
             <br />
             Before commencing, we will present a{" "}
