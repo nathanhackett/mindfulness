@@ -32,7 +32,7 @@
 }
 
 .btnContainer {
-  background-color: rgb(255, 255, 255);
+  background-color: #ffffff;
 }
 
 .textContainer {
@@ -45,18 +45,18 @@
 }
 
 .formContainer {
-  background-color: rgb(255, 255, 255);
+  background-color: #ffffff;
 }
 
 .formFields {
-  background-color: rgb(255, 255, 255);
+  background-color: #ffffff;
   max-width: max-content;
   padding-top: 10px;
   margin: 0 auto;
 }
 
 .responseFields {
-  background-color: rgb(255, 255, 255);
+  background-color: #ffffff;
   max-width: max-content;
   padding-top: 20px;
   margin: 0 auto;
@@ -79,42 +79,6 @@
   padding-right: 20%;
   margin: 0 auto;
 }
-
-/* .helpBubble {
-  background-color: #ffffff;
-  max-width: 300px;
-  margin: 0 auto;
-}
-
-.speechBubbleTemplate {
-  position: absolute;
-  padding: 20px;
-  margin-left: 200px;
-  max-width: 300px;
-  color: grey;
-  background-color: #fff;
-  border-radius: 25px;
-  box-shadow: 2px 2px 4px #888;
-}
-
-.speechBubble {
-  position: fixed;
-  padding: 20px;
-  margin: 20px;
-  margin-left: 200px;
-  top: 300px;
-  max-width: 300px;
-  color: grey;
-  background-color: #fff;
-  border-radius: 25px;
-  box-shadow: 2px 2px 4px #888;
-  opacity: 0;
-  transition: all 0.2s ease-out;
-}
-
-.speechHover:hover + .speechBubble {
-  opacity: 1;
-} */
 
 .imagesContainer {
   position: static;
