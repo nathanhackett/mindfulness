@@ -1,8 +1,130 @@
 .App {
+  align-items: center;
   text-align: center;
-  padding: 10%;
+  padding: 5%;
+  padding-top: 30px;
+  background-color: rgb(255, 255, 255);
+}
+
+.navbar {
+  flex-grow: 1;
+  background-color: #78b8c2;
+  padding: 10px;
+  padding-inline-start: 30px;
+  padding-inline-end: 30px;
+  color: rgb(255, 255, 255);
+  font-size: larger;
+}
+
+.btn {
+  background-color: #ffffff;
+  color: #636363;
+  width: 200px;
+  box-shadow: inset 0 -3em 3em rgba(255, 255, 255, 0.1), 0 0 0 1px #cecece,
+    0.3em 0.3em 1em rgba(0, 0, 0, 0.3);
+}
+
+.btn-modal {
+  background-color: #ffffff;
+  color: #888;
+  width: min-content;
+  padding: 5px;
+}
+
+.btnContainer {
+  background-color: rgb(255, 255, 255);
+}
+
+.textContainer {
+  padding-left: 20%;
+  padding-right: 20%;
+}
+
+.text {
+  color: #888;
 }
 
 .formContainer {
-  text-align: center;
+  background-color: rgb(255, 255, 255);
+}
+
+.formFields {
+  background-color: rgb(255, 255, 255);
+  max-width: max-content;
+  padding-top: 10px;
+  margin: 0 auto;
+}
+
+.responseFields {
+  background-color: rgb(255, 255, 255);
+  max-width: max-content;
+  padding-top: 20px;
+  margin: 0 auto;
+}
+
+.formInput {
+  text-align: left;
+  width: 300px;
+}
+
+.responseInput {
+  text-align: left;
+  width: 500px;
+}
+
+.introductionContainer {
+  background-color: #ffffff;
+  max-width: 1500px;
+  padding-left: 20%;
+  padding-right: 20%;
+  margin: 0 auto;
+}
+
+/* .helpBubble {
+  background-color: #ffffff;
+  max-width: 300px;
+  margin: 0 auto;
+}
+
+.speechBubbleTemplate {
+  position: absolute;
+  padding: 20px;
+  margin-left: 200px;
+  max-width: 300px;
+  color: grey;
+  background-color: #fff;
+  border-radius: 25px;
+  box-shadow: 2px 2px 4px #888;
+}
+
+.speechBubble {
+  position: fixed;
+  padding: 20px;
+  margin: 20px;
+  margin-left: 200px;
+  top: 300px;
+  max-width: 300px;
+  color: grey;
+  background-color: #fff;
+  border-radius: 25px;
+  box-shadow: 2px 2px 4px #888;
+  opacity: 0;
+  transition: all 0.2s ease-out;
+}
+
+.speechHover:hover + .speechBubble {
+  opacity: 1;
+} */
+
+.imagesContainer {
+  position: static;
+  padding-left: 30%;
+  padding-right: 30%;
+  max-height: min-content;
+  display: table-row-group;
+}
+
+.adjacent {
+  width: 50%;
+  float: left;
 }

@@ -1,105 +1,264 @@
-import React, { useState, useEffect } from "react";
-import { db } from "../firebase";
+//backend imports
+import React, { useState } from "react";
+import { auth, db } from "../firebase";
+import { doc, setDoc } from "firebase/firestore";
+import { useNavigate } from "react-router-dom";
 import {
-  collection,
-  getDocs,
-  addDoc,
-  deleteDoc,
-  doc,
-} from "firebase/firestore";
+  createUserWithEmailAndPassword,
+  signInWithEmailAndPassword,
+} from "firebase/auth";
+
+//frontend imports
 import "../App.css";
+import { TextField } from "@mui/material";
+import { MenuItem } from "@material-ui/core";
+import { Button } from "@mui/material";
+import { Tooltip } from "@mui/material";
 
-function LandingPage() {
-  const [users, setUsers] = useState([]); //state to hold user information, initialise as empty array
-  const userCollection = collection(db, "users"); //variable to reference user information from Firestore collection (not state)
+export default function LandingPage() {
+  const [newName, setNewName] = useState(""); //state to hold user name, initialise as empty string
+  const [newAge, setNewAge] = useState(""); //state to hold user age, initialise as 0
+  const [newEmail, setNewEmail] = useState(""); //state to hold user email, initialise as empty string
+  const [newPassword, setNewPassword] = useState("");
+  const [loginEmail, setLoginEmail] = useState("");
+  const [loginPassword, setLoginPassword] = useState("");
 
-  const [newName, setNewName] = useState("");
-  const [newAge, setNewAge] = useState(0);
-  const [newEmail, setNewEmail] = useState("");
+  const navigate = useNavigate();
+  const [signUpError, setSignUpError] = useState("");
+  const [loginEmailError, setloginEmailError] = useState("");
+  const [loginPasswordError, setloginPasswordError] = useState("");
+  //const [user, setUser] = useState({});
 
-  //---(C)RUD---
-  const createUser = async () => {
-    await addDoc(userCollection, {
-      name: newName,
-      age: newAge,
-      email: newEmail,
-    });
+  const signUp = async () => {
+    createUserWithEmailAndPassword(auth, newEmail, newPassword) //from firebase docs, function returns promise, user information stored in "user"
+      .then((userCredential) => {
+        // Signed in
+        const user = userCredential.user;
+        setDoc(doc(db, "users", user.uid), {
+          participantName: newName,
+          participantAge: newAge,
+          participantEmail: newEmail,
+          participantPassword: newPassword,
+        });
+        navigate("/introduction");
+        console.log(user);
+      })
+      .catch((error) => {
+        console.log(error.message);
+        setSignUpError(
+          error.message === "Firebase: Error (auth/invalid-email)."
+            ? "Invalid Email"
+            : "Invalid Password"
+        );
+      });
   };
 
-  //---C(R)UD---
-  useEffect(() => {
-    //triggers every time component is rendered
-    const getUsers = async () => {
-      //async/await function to request from Firebase
-      //returns promise (i.e. the data in the document in its raw form)
-      //cannot make useEffect async, use async inside hook
-      const data = await getDocs(userCollection); //get collection using reference
-      setUsers(data.docs.map((doc) => ({ ...doc.data(), id: doc.id }))); //append fetched information to users array
-      console.log("updated");
-    };
-    getUsers(); //call function to fetch users from Firebase document
-  }, []); //***fix rerendering
-
-  //---CRU(D)---
-  const deleteUser = async (id) => {
-    const userDoc = doc(db, "users", id);
-    await deleteDoc(userDoc);
+  const login = async () => {
+    try {
+      const user = await signInWithEmailAndPassword(
+        auth,
+        loginEmail,
+        loginPassword
+      ); //await function will return promise, user information stored in "user"
+      navigate("/introduction");
+      console.log(user);
+    } catch (error) {
+      console.log(error.message);
+      setloginEmailError(
+        error.message === "Firebase: Error (auth/invalid-email)." ||
+          (error.message === "Firebase: Error (auth/user-not-found)." &&
+            "Invalid Email")
+      );
+      setloginPasswordError(
+        error.message === "Firebase: Error (auth/internal-error)." ||
+          (error.message === "Firebase: Error (auth/wrong-password)." &&
+            "Incorrect Password")
+      );
+    }
   };
+
+  const ages = [
+    {
+      default: "",
+    },
+    {
+      value: "<12",
+      label: "<12",
+    },
+    {
+      value: "13-19",
+      label: "13-19",
+    },
+    {
+      value: "20-29",
+      label: "20-29",
+    },
+    {
+      value: "30-39",
+      label: "30-39",
+    },
+    {
+      value: "40-49",
+      label: "40-49",
+    },
+    {
+      value: "50-59",
+      label: "50-59",
+    },
+    {
+      value: "60+",
+      label: "60+",
+    },
+  ];
 
   return (
-    <div className="formContainer">
-      <form>
-        {/* ---(C)RUD--- */}
-        <div>
-          <input
-            placeholder="Name"
-            onChange={(event) => {
-              setNewName(event.target.value);
-            }}
-          />
-        </div>
-        <div>
-          <input
-            type="number"
-            placeholder="Age"
-            onChange={(event) => {
-              setNewAge(event.target.value);
-            }}
-          />
-        </div>
-        <div>
-          <input
-            type="email"
-            placeholder="Email"
-            onChange={(event) => {
-              setNewEmail(event.target.value);
-            }}
-          />
-        </div>
-        <button onClick={createUser}>Continue</button>
-        {/*needs to be an interval dropdown*/}
-
-        {/* ---C(R)UD--- */}
-        {users.map((user) => {
-          return (
-            <div>
-              <h1>Name: {user.name}</h1>
-              <h1>Age: {user.age}</h1>
-              <h1>Email: {user.email}</h1>
-              {/* ---CRU(D)--- */}
-              <button
-                onClick={() => {
-                  deleteUser(user.id);
-                }}
-              >
-                Delete User
-              </button>
-            </div>
-          );
-        })}
-      </form>
+    <div className="App">
+      <h1>Mindfulness Measure</h1>
+      <br />
+      <h4>A Maynooth University Research Initiative</h4>
+      <br />
+      <div className="adjacent">
+        <form className="formContainer">
+          {/* ---(C)RUD--- */}
+          <div className="formFields">
+            <h4>For New Users</h4>
+            <br />
+            <TextField
+              className="formInput"
+              id="outlined-basic"
+              label="Name"
+              variant="outlined"
+              helperText="Please enter your Full name"
+              onChange={(event) => {
+                setNewName(event.target.value);
+              }}
+              required
+            />
+          </div>
+          <div className="formFields">
+            <TextField
+              className="formInput"
+              select
+              id="outlined-basic"
+              label="Age"
+              variant="outlined"
+              helperText="Please select your age bracket"
+              onChange={(event) => {
+                setNewAge(event.target.value);
+              }}
+              required
+            >
+              {ages.map((age) => (
+                <MenuItem key={age.value} value={age.value}>
+                  {age.label}
+                </MenuItem>
+              ))}
+            </TextField>
+          </div>
+          <div className="formFields">
+            <TextField
+              className="formInput"
+              id="outlined-basic"
+              label="Email"
+              variant="outlined"
+              helperText="Please enter your MU mail"
+              onChange={(event) => {
+                setNewEmail(event.target.value);
+              }}
+              required
+            />
+          </div>
+          <div className="formFields">
+            <TextField
+              className="formInput"
+              id="outlined-basic"
+              label="Password"
+              type="password"
+              variant="outlined"
+              helperText="Please enter a generic password (>6 characters) (not one of your actual passwords)"
+              onChange={(event) => {
+                setNewPassword(event.target.value);
+              }}
+              required
+            />
+          </div>
+          <br />
+          <Tooltip
+            placement="top"
+            title="This research is being conducted in accordance with University
+              security and privacy policies.
+              This information is necessary in identifying demographic patterns
+              in the sample response collection.
+              It also provides a means of identifying participants and reaching
+              out to whom it may concern."
+          >
+            <p>Why do we need this information?</p>
+          </Tooltip>
+          <div style={{ color: "#FF0000" }}>
+            <b>{signUpError}</b>
+          </div>
+          <br />
+          <Button
+            disabled={false}
+            className="btn"
+            style={{ textTransform: "capitalize", color: "grey" }}
+            onClick={signUp}
+          >
+            Continue
+          </Button>
+        </form>
+      </div>
+      <div className="adjacent">
+        <form className="formContainer">
+          <div className="formFields">
+            <h4>For Existing Users</h4>
+            <br />
+            <TextField
+              className="formInput"
+              id="outlined-basic"
+              label="Email"
+              variant="outlined"
+              error={loginEmailError}
+              helperText={
+                loginEmailError ? "Invalid Email" : "Please enter your MU mail"
+              }
+              onChange={(event) => {
+                setLoginEmail(event.target.value);
+              }}
+              required
+            />
+          </div>
+          <div className="formFields">
+            <TextField
+              className="formInput"
+              id="outlined-basic"
+              label="Password"
+              type="password"
+              variant="outlined"
+              error={loginPasswordError}
+              helperText={
+                loginPasswordError
+                  ? "Incorrect Password"
+                  : "Please enter your password"
+              }
+              onChange={(event) => {
+                setLoginPassword(event.target.value);
+              }}
+              required
+            />
+          </div>
+          <br />
+          <Button
+            disabled={false}
+            className="btn"
+            style={{ textTransform: "capitalize", color: "grey" }}
+            onClick={login}
+          >
+            Login
+          </Button>
+          <br />
+        </form>
+      </div>
     </div>
   );
 }
-
-export default LandingPage;

@@ -1,0 +1,4 @@
+firebase-tools
+react-router-dom
+react bootstrap
+MaterialUI (core/icons)
