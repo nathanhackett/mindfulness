@@ -2,10 +2,34 @@ import React, { useState } from "react";
 import { db, auth } from "../firebase";
 import { doc, updateDoc } from "firebase/firestore";
 import { useNavigate } from "react-router-dom";
-import { Button, ImageList, ImageListItem, FormControl } from "@mui/material";
+import {
+  Button,
+  ImageList,
+  ImageListItem,
+  FormControl,
+  MenuItem,
+} from "@mui/material";
 import TextField from "@mui/material/TextField";
 import Timer from "../Components/Timer";
 import { Images } from "../Components/Images";
+
+const options = [
+  {
+    default: "",
+  },
+  {
+    value: "Take a photo",
+    label: "Take a photo.",
+  },
+  {
+    value: "Inspect closer",
+    label: "Inspect closer.",
+  },
+  {
+    value: "Leave",
+    label: "Leave.",
+  },
+];
 
 export default function Task4() {
   const [ans1, setAns1] = useState("");
@@ -110,22 +134,29 @@ export default function Task4() {
       <form className="formContainer">
         <div className="responseFields">
           <TextField
+            select
             className="responseInput"
             id="outlined-basic"
-            label="What do you see in the image above?"
+            label="If you saw this yourself, what would you do?"
             variant="outlined"
             value={ans1}
             onChange={(event) => {
               setAns1(event.target.value);
             }}
-          />
+          >
+            {options.map((option) => (
+              <MenuItem key={option.value} value={option.value}>
+                {option.label}
+              </MenuItem>
+            ))}
+          </TextField>
         </div>
 
         <div className="responseFields">
           <TextField
             className="responseInput"
             id="outlined-basic"
-            label="Does this image mean anything to you?"
+            label="Do you think this image relates to the previous ones? Why? Why not?"
             variant="outlined"
             value={ans2}
             onChange={(event) => {

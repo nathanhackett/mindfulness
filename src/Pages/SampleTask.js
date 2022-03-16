@@ -52,7 +52,7 @@ export default function SampleTask() {
         <Tooltip
           arrow
           placement="right"
-          title="You will be presented with images containing visaul ambiguity, no more can be said about them!"
+          title="You will be presented with images containing visual ambiguity, no more can be said about them!"
         >
           <ImageList cols={1}>
             {Images.map((image) => (
@@ -75,7 +75,7 @@ export default function SampleTask() {
           <Tooltip
             arrow
             placement="top"
-            title="You will be asked questions either relating to the image or your response to it, answer as honestly as you can!"
+            title="You will be asked questions relating either to the image or your response to it, answer as honestly as you can!"
           >
             <TextField
               className="responseInput"
@@ -94,14 +94,13 @@ export default function SampleTask() {
           <TextField
             className="responseInput"
             id="outlined-basic"
-            label="Does this image mean anything to you?"
+            label="Does this image remind you of anything or anyone?"
             variant="outlined"
             value={ans2}
             onChange={(event) => {
               setAns2(event.target.value);
             }}
           />
-
           <br />
           <br />
         </div>

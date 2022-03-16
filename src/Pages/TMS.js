@@ -46,26 +46,31 @@ const legend = [
     id: 0,
     value: 0,
     description: "Not at All",
+    color: "#ffc7c7",
   },
   {
     id: 1,
     value: 1,
     description: "A Little",
+    color: "#ffe2c7",
   },
   {
     id: 2,
     value: 2,
     description: "Moderately",
+    color: "#fffdc7",
   },
   {
     id: 3,
     value: 3,
     description: "Quite a Bit",
+    color: "#e4ffcf",
   },
   {
     id: 4,
     value: 4,
     description: "Very Much",
+    color: "#cfffd3",
   },
 ];
 
@@ -151,21 +156,24 @@ export default function TMS() {
         <TableContainer component={Paper}>
           <Table aria-label="simple table">
             <TableHead>
-              {legend.map((rating) => (
+              {legend.map((key) => (
                 <TableRow>
                   <TableCell
                     align="center"
                     width={120}
                     style={{ backgroundColor: "#e8e8e8", fontWeight: "bold" }}
                   >
-                    {rating.id}
+                    {key.id}
                   </TableCell>
                   <TableCell
                     align="left"
                     width={120}
-                    style={{ fontWeight: "bold" }}
+                    style={{
+                      backgroundColor: key.color,
+                      fontWeight: "bold",
+                    }}
                   >
-                    {rating.description}
+                    {key.description}
                   </TableCell>
                 </TableRow>
               ))}
@@ -229,7 +237,7 @@ export default function TMS() {
               <TableCell align="center">1</TableCell>
               <TableCell align="left">
                 I experienced myself as separate from my changing thoughts and
-                feelings.
+                feelings while answering the questions.
               </TableCell>
             </TableRow>
             <TableRow>
@@ -262,8 +270,8 @@ export default function TMS() {
               </TableCell>
               <TableCell align="center">2</TableCell>
               <TableCell align="left">
-                I was more concerned with being open to my experiences than
-                controlling or changing them.
+                I was more concerned with being open and honest about my answers
+                rather than changing them.
               </TableCell>
             </TableRow>
             <TableRow>
@@ -331,7 +339,8 @@ export default function TMS() {
               </TableCell>
               <TableCell align="center">4</TableCell>
               <TableCell align="left">
-                I experienced my thoughts more as events in my mind than as a
+                When asked a question relating to my own thoughts/opinions, I
+                experienced my thoughts more as events in my mind than as a
                 necessarily accurate reflection of the way things 'really' are.
               </TableCell>
             </TableRow>
@@ -400,7 +409,7 @@ export default function TMS() {
               <TableCell align="center">6</TableCell>
               <TableCell align="left">
                 I was curious about each of the thoughts and feelings that I was
-                having.
+                having, particularly while answering the questions.
               </TableCell>
             </TableRow>
             <TableRow>
@@ -535,8 +544,7 @@ export default function TMS() {
               </TableCell>
               <TableCell align="center">10</TableCell>
               <TableCell align="left">
-                I remained curious about the nature of each experience as it
-                arose.
+                I remained curious about the nature of each image.
               </TableCell>
             </TableRow>
             <TableRow>
@@ -603,7 +611,7 @@ export default function TMS() {
               </TableCell>
               <TableCell align="center">12</TableCell>
               <TableCell align="left">
-                I was curious about my reactions to things.
+                I was curious about my reactions to each image.
               </TableCell>
             </TableRow>
             <TableRow>

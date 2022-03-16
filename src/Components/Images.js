@@ -18,7 +18,7 @@ export const Images = [
     title: "Image 2",
   },
   {
-    img: "https://i.ibb.co/hdC6b3h/28d78ba13913f071809a1c2165b841be.jpg",
+    img: "https://i.ibb.co/mqz0wf7/Image-1.jpg",
     title: "Image 3",
   },
   {
@@ -30,7 +30,7 @@ export const Images = [
     title: "Image 5",
   },
   {
-    img: "https://i.ibb.co/mqz0wf7/Image-1.jpg",
+    img: "https://i.ibb.co/hdC6b3h/28d78ba13913f071809a1c2165b841be.jpg",
     title: "Sample Image",
   },
 ];

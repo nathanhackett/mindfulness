@@ -13,8 +13,9 @@ export default function EndTasks() {
           <br />
           <br />
           The following page will present you with the
-          <b> Toronto Mindfulness Scale (TMS)</b>, a scale that assesses a
-          user’s “state” mindfulness (i.e., what state of mind the user is in).
+          <b> Toronto Mindfulness Scale</b>, a scale that assesses a user’s
+          “state” mindfulness (i.e., what state of mind the user is in during
+          and after experiencing something).
         </p>
       </div>
       <br />

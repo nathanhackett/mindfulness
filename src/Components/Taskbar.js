@@ -73,7 +73,7 @@ export default function Taskbar() {
           }}
         >
           {window.location.pathname === "/sampleTask" && "Sample Image"}
-          {window.location.pathname === "/sampleSort" && "Sorting Task"}
+          {window.location.pathname === "/sampleSort" && "Sample Sorting Task"}
         </h1>
       </FormControl>
       <FormControl

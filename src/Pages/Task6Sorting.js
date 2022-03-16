@@ -42,8 +42,8 @@ export default function Task6Sorting() {
           sortingTaskField5: ans5,
         });
         navigate("/taskEnd");
-      } else if (ans1 || ans2 || ans3 || ans4 || ans5 === "") {
-        setSameAns("Please provide a value for all fields.");
+        // } else if (ans1 || ans2 || ans3 || ans4 || ans5 === null) {
+        //   setSameAns("Please provide a value for all fields.");
       } else {
         setSameAns("Can't have two of the same values.");
       }
@@ -106,10 +106,10 @@ export default function Task6Sorting() {
       <br />
       <div className="textContainer">
         <p>
-          Based on the below images, please Rate them 1-5
-          <b> in order of how easy you find it</b> to determine what the picture
-          is depicting (or attempting to depict), where <b>1 is easiest</b>,{" "}
-          <b>5 is hardest.</b>
+          Based on the below images, please Rate them 1-5 in order of how easy
+          you find it to determine{" "}
+          <b>what the picture is depicting (or attempting to depict)</b> , where{" "}
+          <b>1 is easiest</b>, <b>5 is hardest.</b>
         </p>
       </div>
       <br />
@@ -134,7 +134,7 @@ export default function Task6Sorting() {
           <ImageListItem>
             <p style={{ padding: "10px" }}>Image 3</p>
             <img
-              src="https://i.ibb.co/hdC6b3h/Image-3.jpg"
+              src="https://i.ibb.co/mqz0wf7/Image-1.jpg"
               alt="Image 3"
               border="0"
             />

@@ -119,7 +119,7 @@ export default function Task2() {
           <TextField
             className="responseInput"
             id="outlined-basic"
-            label="What do you see in the image above?"
+            label="Provide one word that you think best describes the above image."
             variant="outlined"
             value={ans1}
             onChange={(event) => {

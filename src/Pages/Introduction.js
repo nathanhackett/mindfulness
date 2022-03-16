@@ -10,12 +10,13 @@ export default function Introduction() {
       <div className="introductionContainer">
         <div>
           <h2 className="text">About Mindfulness Measure</h2>
-          <p>
+          <p style={{ textAlign: "justify" }}>
             Mindfulness is characterised by a focused, non-evaluative attention
             to and awareness of the present moment. In recent years the advent
-            of social media, SPA's, endless scrolling, etc., means that computer
-            interfaces are likely to cause people to lose mindfulness and
-            experience feelings such as missing time.
+            of social media, Single Page Applications (SPA's), endless
+            scrolling, etc., means that computer interfaces are likely to cause
+            people to lose personal mindfulness and experience feelings such as
+            missing time.
             <br />
             <br />
             This application will require you, the participant, to undertake 6
@@ -26,8 +27,12 @@ export default function Introduction() {
             Mindfulness Scale" with regard to the tasks you have just completed.
             <br />
             <br />
+            In total, the tasks should take approximately X minutes to complete,
+            but please answer as best as you can at your own pace!
+            <br />
+            <br />
             Before commencing, we will present a{" "}
-            <b>tutorial of 2 sample tasks</b> that will demonstrate what you
+            <b>tutorial of two sample tasks</b> that will demonstrate what you
             will be asked.
           </p>
         </div>

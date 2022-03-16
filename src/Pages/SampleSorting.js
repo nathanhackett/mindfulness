@@ -5,8 +5,8 @@ import { useNavigate } from "react-router-dom";
 import {
   Button,
   ImageList,
-  ImageListItem,
   FormControl,
+  Tooltip,
   MenuItem,
   TextField,
   Skeleton,
@@ -42,8 +42,8 @@ export default function SampleSorting() {
           sampleSortingTask5: ans5,
         });
         navigate("/tutorialEnd");
-      } else if (ans1 || ans2 || ans3 || ans4 || ans5 === null) {
-        setSameAns("Please provide a value for all fields.");
+        // } else if (ans1 || ans2 || ans3 || ans4 || ans5 === null) {
+        //   setSameAns("Please provide a value for all fields.");
       } else {
         setSameAns("Can't have two of the same values.");
       }
@@ -55,11 +55,18 @@ export default function SampleSorting() {
       <Taskbar />
       <div className="textContainer">
         <br />
-        <p className="text">
-          Based on the below images, please rate them 1-5
-          <b> in order of how easy you find it</b> to identify what is being
-          depicted, where <b>1 is easiest</b>, <b>5 is hardest.</b>
-        </p>
+        <Tooltip
+          arrow
+          placement="top"
+          title="You will then be asked to sort the images as per the description below using the dropdown selections."
+        >
+          <p className="text">
+            Based on the below images, please Rate them 1-5 in order of how easy
+            you find it to determine{" "}
+            <b>what the picture is depicting (or attempting to depict)</b> ,
+            where <b>1 is easiest</b>, <b>5 is hardest.</b>
+          </p>
+        </Tooltip>
       </div>
       <br />
       <br />
