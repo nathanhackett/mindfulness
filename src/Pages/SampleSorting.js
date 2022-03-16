@@ -67,6 +67,10 @@ export default function SampleSorting() {
             where <b>1 is easiest</b>, <b>5 is hardest.</b>
           </p>
         </Tooltip>
+        <p className="text">
+          (Aside: the below images are placeholders to show where the images
+          will be in the actual task, the grey boxes are displaying correctly.)
+        </p>
       </div>
       <br />
       <br />
