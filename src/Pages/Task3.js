@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { db, auth } from "../firebase";
 import { doc, updateDoc } from "firebase/firestore";
 import { useNavigate } from "react-router-dom";
@@ -46,6 +46,25 @@ const options2 = [
 ];
 
 export default function Task3() {
+  const [time, setTime] = useState(0);
+  const [timerOn, setTimerOn] = useState(false);
+
+  useEffect(() => {
+    let interval = null;
+    {
+      window.location.pathname === "/task3" && setTimerOn(true);
+    }
+    if (timerOn) {
+      interval = setInterval(() => {
+        setTime((prevTime) => prevTime + 10);
+      }, 10);
+    } else if (!timerOn) {
+      clearInterval(interval);
+    }
+
+    return () => clearInterval(interval);
+  }, [timerOn]);
+
   const [ans1, setAns1] = useState("");
   const [ans2, setAns2] = useState("");
   const [ans3, setAns3] = useState("");
@@ -61,6 +80,7 @@ export default function Task3() {
           task3Field1: ans1,
           task3Field2: ans2,
           task3Field3: ans3,
+          task3Time: time,
         });
         navigate("/task4");
       } else {

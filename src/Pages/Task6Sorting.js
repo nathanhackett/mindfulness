@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { auth, db } from "../firebase";
 import { doc, updateDoc } from "firebase/firestore";
 import { useNavigate } from "react-router-dom";
@@ -14,6 +14,25 @@ import Timer from "../Components/Timer";
 import { Rating } from "../Components/Rating";
 
 export default function Task6Sorting() {
+  const [time, setTime] = useState(0);
+  const [timerOn, setTimerOn] = useState(false);
+
+  useEffect(() => {
+    let interval = null;
+    {
+      window.location.pathname === "/task6" && setTimerOn(true);
+    }
+    if (timerOn) {
+      interval = setInterval(() => {
+        setTime((prevTime) => prevTime + 10);
+      }, 10);
+    } else if (!timerOn) {
+      clearInterval(interval);
+    }
+
+    return () => clearInterval(interval);
+  }, [timerOn]);
+
   const [ans1, setAns1] = useState(0);
   const [ans2, setAns2] = useState(0);
   const [ans3, setAns3] = useState(0);
@@ -40,6 +59,7 @@ export default function Task6Sorting() {
           sortingTaskField3: ans3,
           sortingTaskField4: ans4,
           sortingTaskField5: ans5,
+          sortingTaskTime: time,
         });
         navigate("/taskEnd");
         // } else if (ans1 || ans2 || ans3 || ans4 || ans5 === null) {

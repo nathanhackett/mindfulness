@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { db, auth } from "../firebase";
 import { doc, updateDoc } from "firebase/firestore";
 import { useNavigate } from "react-router-dom";
@@ -32,6 +32,25 @@ const options = [
 ];
 
 export default function Task1() {
+  const [time, setTime] = useState(0);
+  const [timerOn, setTimerOn] = useState(false);
+
+  useEffect(() => {
+    let interval = null;
+    {
+      window.location.pathname === "/task1" && setTimerOn(true);
+    }
+    if (timerOn) {
+      interval = setInterval(() => {
+        setTime((prevTime) => prevTime + 10);
+      }, 10);
+    } else if (!timerOn) {
+      clearInterval(interval);
+    }
+
+    return () => clearInterval(interval);
+  }, [timerOn]);
+
   const [ans1, setAns1] = useState("");
   const [ans2, setAns2] = useState("");
   const [emptyAns, setEmptyAns] = useState("");
@@ -45,6 +64,7 @@ export default function Task1() {
         updateDoc(doc(db, "users", uid), {
           task1Field1: ans1,
           task1Field2: ans2,
+          task1Time: time,
         });
         navigate("/task2");
       } else {

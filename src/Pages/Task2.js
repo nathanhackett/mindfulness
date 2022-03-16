@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { db, auth } from "../firebase";
 import { doc, updateDoc } from "firebase/firestore";
 import { useNavigate } from "react-router-dom";
@@ -7,14 +7,26 @@ import TextField from "@mui/material/TextField";
 import Timer from "../Components/Timer";
 import { Images } from "../Components/Images";
 
-const itemData = [
-  {
-    img: "https://images.unsplash.com/photo-1551963831-b3b1ca40c98e",
-    title: "Breakfast",
-  },
-];
-
 export default function Task2() {
+  const [time, setTime] = useState(0);
+  const [timerOn, setTimerOn] = useState(false);
+
+  useEffect(() => {
+    let interval = null;
+    {
+      window.location.pathname === "/task2" && setTimerOn(true);
+    }
+    if (timerOn) {
+      interval = setInterval(() => {
+        setTime((prevTime) => prevTime + 10);
+      }, 10);
+    } else if (!timerOn) {
+      clearInterval(interval);
+    }
+
+    return () => clearInterval(interval);
+  }, [timerOn]);
+
   const [ans1, setAns1] = useState("");
   const [ans2, setAns2] = useState("");
   const [emptyAns, setEmptyAns] = useState("");
@@ -28,6 +40,7 @@ export default function Task2() {
         updateDoc(doc(db, "users", uid), {
           task2Field1: ans1,
           task2Field2: ans2,
+          task2Time: time,
         });
         navigate("/task3");
       } else {
