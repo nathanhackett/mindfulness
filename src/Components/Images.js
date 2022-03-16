@@ -1,13 +1,3 @@
-import React from "react";
-
-// export const Image1 = () => {
-//   <img
-//     src="https://i.ibb.co/mqz0wf7/Image-1.jpg"
-//     alt="Image 1"
-//     border="0"
-//   ></img>;
-// };
-
 export const Images = [
   {
     img: "https://i.ibb.co/tZmWBkt/Image-2.jpg",
